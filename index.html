@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datalox — Agent-Powered Scientific Workspace</title>
+    <title>Datalox — Portable Scientific Runtime for AI Agents</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Fallback Font Awesome CDN -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" media="print" onload="this.media='all'">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -19,10 +17,10 @@
                 <span>Datalox</span>
             </div>
             <div class="nav-menu">
-                <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#advantages" class="nav-link">Advantages</a>
-                <a href="#vision" class="nav-link">Product Vision</a>
-                <a href="#platform" class="nav-link">Platform</a>
+                <a href="#vision" class="nav-link">Vision</a>
+                <a href="#how-it-works" class="nav-link">Principles</a>
+                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="#platform" class="nav-link">Runtime API</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <a href="mailto:contact@complexity-ai.com" class="contribution-btn">
                     <i class="fas fa-paper-plane"></i>
@@ -32,153 +30,154 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <span> Agent-Powered Scientific Workspace </span>
+                    <span>Portable Scientific Runtime for AI Agents</span>
                 </div>
                 <h1 class="hero-title">
-                    A cockpit for biotech data, with an AI agent in the seat beside you.
+                    Scientific infrastructure any agent can use to compute, interpret, and reason over experiments.
                 </h1>
                 <p class="hero-description">
-                   Datalox is like FlowJo + a lab notebook + a compute runner, all in one. Researchers work in interactive canvases while the agent runs analyses, flags QC issues, and produces shareable results.
+                    Datalox is not an "AI cytometry assistant" and not an "agent framework." It is a programmable execution and data layer for biological experiments. Agents become clients of the runtime.
                 </p>
                 <div class="hero-highlights">
-                    <div class="highlight-pill"><i class="fas fa-diagram-project"></i> Interactive canvases</div>
-                    <div class="highlight-pill"><i class="fas fa-terminal"></i> Agent-guided analysis</div>
-                    <div class="highlight-pill"><i class="fas fa-user-edit"></i> Reproducible run history</div>
+                    <div class="highlight-pill"><i class="fas fa-microchip"></i> Deterministic scientific compute</div>
+                    <div class="highlight-pill"><i class="fas fa-database"></i> Structured experiment state</div>
+                    <div class="highlight-pill"><i class="fas fa-brain"></i> Agent-side reasoning</div>
                 </div>
                 <div class="hero-buttons">
-                    <a href="#platform" class="btn btn-primary">
+                    <a href="#architecture" class="btn btn-primary">
                         <i class="fas fa-layer-group"></i>
-                        Explore the Workspace
+                        View Architecture
                     </a>
-                    <a href="#how-it-works" class="btn btn-secondary">
-                        <i class="fas fa-glasses"></i>
-                        See How It Works
+                    <a href="#platform" class="btn btn-secondary">
+                        <i class="fas fa-plug"></i>
+                        Explore API Layer
                     </a>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="floating-card card-1">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Gating Canvas</span>
+                    <i class="fas fa-gears"></i>
+                    <span>Execution Runtime</span>
                 </div>
                 <div class="floating-card card-2">
-                    <i class="fas fa-plug"></i>
-                    <span>Agent Assist</span>
+                    <i class="fas fa-sitemap"></i>
+                    <span>Experiment State</span>
                 </div>
                 <div class="floating-card card-3">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>QC Checks</span>
+                    <i class="fas fa-wave-square"></i>
+                    <span>Signal Compiler</span>
                 </div>
                 <div class="floating-card card-4">
-                    <i class="fas fa-people-arrows"></i>
-                    <span>Shareable Results</span>
+                    <i class="fas fa-robot"></i>
+                    <span>Any Agent</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
     <section id="how-it-works" class="how-it-works">
         <div class="container">
             <div class="section-header">
-                <h2>How It Works: From Data to Decisions</h2>
-                <p>You work in interactive canvases. The agent helps you move faster without hiding the work.</p>
+                <h2>Core Design Principle</h2>
+                <p>Keep compute, state, meaning, and reasoning as separate layers with explicit boundaries.</p>
             </div>
             <div class="how-grid">
                 <div class="how-card old-way">
-                    <h3>The Old Way (Fragmented Tools)</h3>
-                    <p>Data lives in one place, analysis in another, and notes in a third. Context gets lost.</p>
+                    <h3>Tightly Coupled Assistant Pattern</h3>
+                    <p>When compute and reasoning are mixed together, systems become hard to port, inspect, and reproduce.</p>
                     <ul class="how-list">
-                        <li>Manual copy‑paste between apps and file formats.</li>
-                        <li>Hard to reproduce results or explain what changed.</li>
-                        <li>QC issues discovered late, if at all.</li>
+                        <li>The assistant owns both execution and interpretation.</li>
+                        <li>Manual state is hidden in prompts or transient context.</li>
+                        <li>Changing agents means rebuilding the stack.</li>
                     </ul>
                 </div>
                 <div class="how-card new-way">
-                    <h3>Your Way (Unified Workspace)</h3>
-                    <p>Operate on data directly in rich canvases, with an agent that guides each step and records the work.</p>
+                    <h3>Portable Runtime Pattern</h3>
+                    <p>The runtime executes science. The state tracks experiments. Agents reason on top through a stable API.</p>
                     <ul class="how-list">
-                        <li>Interactive views for gating, structures, and results.</li>
-                        <li>The agent suggests next steps, runs analyses, and explains tradeoffs.</li>
-                        <li>Every action is saved as a traceable run history.</li>
+                        <li>Runtime handles deterministic and reproducible computation.</li>
+                        <li>Experiment state preserves gates, groups, conditions, and history.</li>
+                        <li>Any agent can plug in and reason without owning execution.</li>
                     </ul>
                     <div class="cell-pills">
-                        <span class="cell-pill"><i class="fas fa-code"></i> Gating canvas</span>
-                        <span class="cell-pill"><i class="fas fa-plug"></i> Structure view</span>
-                        <span class="cell-pill"><i class="fas fa-chart-area"></i> QC checks</span>
-                        <span class="cell-pill"><i class="fas fa-comment-dots"></i> Run history</span>
+                        <span class="cell-pill"><i class="fas fa-cpu"></i> Compute</span>
+                        <span class="cell-pill"><i class="fas fa-folder-tree"></i> State</span>
+                        <span class="cell-pill"><i class="fas fa-dna"></i> Meaning</span>
+                        <span class="cell-pill"><i class="fas fa-lightbulb"></i> Reasoning</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Advantages Section -->
-    <section id="advantages" class="advantages">
+    <section class="advantages">
         <div class="container">
             <div class="section-header">
-                <h2>Key Advantages</h2>
-                <p>Why biotech teams choose an agent‑powered workspace.</p>
+                <h2>What Each Layer Owns</h2>
+                <p>Each concern has one job and one source of truth.</p>
             </div>
             <div class="advantage-grid">
                 <div class="advantage-card">
                     <span class="adv-number">01</span>
-                    <h3>Faster Analysis</h3>
-                    <p>Run complex workflows with fewer handoffs. The agent handles routine steps so you stay focused on decisions.</p>
+                    <h3>Compute</h3>
+                    <p>Node-graph execution for transformations, clustering, gating, and stats with deterministic outputs and caching.</p>
                 </div>
                 <div class="advantage-card">
                     <span class="adv-number">02</span>
-                    <h3>Clear Provenance</h3>
-                    <p>Every action, setting, and result is saved. Reproduce, review, or share with confidence.</p>
+                    <h3>State</h3>
+                    <p>Experiment structure that tracks samples, conditions, manual gates, populations, and full analysis history.</p>
                 </div>
                 <div class="advantage-card">
                     <span class="adv-number">03</span>
-                    <h3>Real Collaboration</h3>
-                    <p>Interactive canvases make it easy for teams to review, refine, and build on each other’s work.</p>
+                    <h3>Meaning</h3>
+                    <p>Biological entities convert measurement space into interpretable objects such as populations, phenotypes, and comparisons.</p>
+                </div>
+                <div class="advantage-card">
+                    <span class="adv-number">04</span>
+                    <h3>Reasoning</h3>
+                    <p>Agents consume structured signals and context to generate hypotheses, explanations, and next-step suggestions.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Vision Section -->
     <section id="vision" class="vision">
         <div class="container">
             <div class="vision-content">
                 <div class="vision-text">
-                    <h2>The Product Vision: Your Lab, Unified</h2>
-                    <p class="vision-subtitle">A workspace where data, analysis, and documentation stay together.</p>
+                    <h2>Our Vision</h2>
+                    <p class="vision-subtitle">A portable scientific runtime for biological experiments, designed to be agent-agnostic.</p>
                     <div class="vision-points">
                         <div class="vision-point">
                             <div class="point-number">01</div>
                             <div class="point-content">
-                                <h4>Operate in Canvases</h4>
-                                <p>Gating, structures, and analysis happen where you can see and interact with the data.</p>
+                                <h4>Data Layer</h4>
+                                <p>Raw measurements only: FCS files, microscopy images, sequencing counts, protein sequences.</p>
                             </div>
                         </div>
                         <div class="vision-point">
                             <div class="point-number">02</div>
                             <div class="point-content">
-                                <h4>Agent as Lab Assistant</h4>
-                                <p>It suggests next steps, runs the right tools, and explains tradeoffs without hiding the work.</p>
+                                <h4>Scientific Execution Runtime</h4>
+                                <p>Operation graph for load, compensate, transform, cluster, gate, and compute statistics.</p>
                             </div>
                         </div>
                         <div class="vision-point">
                             <div class="point-number">03</div>
                             <div class="point-content">
-                                <h4>QC, Reports, and Methods</h4>
-                                <p>Generate figures, tables, and methods automatically — and keep them tied to the run.</p>
+                                <h4>Experiment State + Biological Entities</h4>
+                                <p>Track scientist actions, then map numbers into populations, marker profiles, and phenotypes.</p>
                             </div>
                         </div>
                         <div class="vision-point">
                             <div class="point-number">04</div>
                             <div class="point-content">
-                                <h4>Reproducible by Default</h4>
-                                <p>Every analysis creates a traceable record you can revisit, share, or audit later.</p>
+                                <h4>Signal Compiler</h4>
+                                <p>Emit structured evidence like frequency changes, marker shifts, gate shifts, and outlier scores.</p>
                             </div>
                         </div>
                     </div>
@@ -188,29 +187,64 @@
                         <div class="timeline-item active">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h5>Interactive Canvases</h5>
-                                <p>Manipulate data directly with visual tools.</p>
+                                <h5>Layer 1: Data</h5>
+                                <p>Store measurements, no interpretation.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h5>Agent Assistance</h5>
-                                <p>Suggestions, automation, and explanations.</p>
+                                <h5>Layer 2: Scientific Runtime</h5>
+                                <p>Deterministic compute engine.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h5>QC + Outputs</h5>
-                                <p>Figures, tables, and methods tied to runs.</p>
+                                <h5>Layer 3: Experiment State</h5>
+                                <p>Samples, gates, conditions, history.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h5>Shareable History</h5>
-                                <p>Reproduce and review work with confidence.</p>
+                                <h5>Layer 4: Biological Entities</h5>
+                                <p>Population and phenotype objects.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>Layer 5: Signal Compiler</h5>
+                                <p>Structured evidence, not conclusions.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>Layer 6: Runtime API</h5>
+                                <p>Stable tool interface for any agent.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>Layer 7: Skills</h5>
+                                <p>Reusable analysis workflows.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>Layer 8: Agent</h5>
+                                <p>Interpretation, hypotheses, suggestions.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h5>Layer 9: UI</h5>
+                                <p>Scientist and agent collaborate in the loop.</p>
                             </div>
                         </div>
                     </div>
@@ -219,75 +253,75 @@
         </div>
     </section>
 
-    <!-- Platform Section -->
-    <section id="platform" class="architecture">
+    <section id="architecture" class="architecture">
         <div class="container">
             <div class="section-header">
-                <h2>Platform Capabilities</h2>
-                <p>Everything you need to analyze, document, and share biotech data in one workspace.</p>
+                <h2>Full Architecture</h2>
+                <p>From measurement to interpretation, each stage is explicit and replaceable.</p>
             </div>
             <div class="tl-grid">
                 <div class="tl-card">
-                    <h3>Interactive Canvases</h3>
-                    <p>Visual tools for gating, structures, and analysis that keep you close to the data.</p>
+                    <h3>Runtime Responsibilities</h3>
+                    <p>Deterministic computation, reproducibility, caching, and scalable execution for scientific workflows.</p>
                 </div>
                 <div class="tl-card">
-                    <h3>Agent‑Driven Analysis</h3>
-                    <p>Run the right steps, catch QC issues early, and get clear explanations.</p>
+                    <h3>Experiment Representation</h3>
+                    <p>An explicit experiment graph containing samples, conditions, gating trees, and derived populations.</p>
                 </div>
                 <div class="tl-card">
-                    <h3>Reproducible History</h3>
-                    <p>Every action produces a run record you can revisit or share with reviewers.</p>
+                    <h3>Evidence Extraction</h3>
+                    <p>Compile raw outputs into reusable signals: PopulationChange, MarkerShift, DistributionShift, GateShift.</p>
                 </div>
                 <div class="tl-card">
-                    <h3>Shareable Outputs</h3>
-                    <p>Generate figures, tables, and methods without leaving the workspace.</p>
+                    <h3>Agent-Agnostic Interface</h3>
+                    <p>Expose runtime operations through a stable tool surface that any agent can call.</p>
                 </div>
             </div>
             <div class="architecture-panels">
                 <div class="architecture-panel">
-                    <h3>Glass‑Box Visibility</h3>
+                    <h3>Portable Runtime API</h3>
                     <ul class="arc-list">
-                        <li>See what the agent did, why it did it, and what changed.</li>
-                        <li>Edit parameters or re‑run steps without losing context.</li>
-                        <li>Trust grows because the work stays inspectable.</li>
+                        <li>Initialize and manage experiment state across samples, conditions, and analysis history.</li>
+                        <li>Run scientific workflows for gating, transforms, clustering, and population statistics.</li>
+                        <li>Return structured evidence so external agents can interpret results and reason on top.</li>
                     </ul>
                 </div>
                 <div class="architecture-panel">
-                    <h3>Scientist‑Friendly</h3>
+                    <h3>Skills Layer</h3>
                     <ul class="arc-list">
-                        <li>Natural workflows that match how labs already operate.</li>
-                        <li>No need to juggle notebooks, scripts, and exports.</li>
-                        <li>Results are ready to present and share.</li>
+                        <li>Reusable workflows such as QC analysis and immune population annotation.</li>
+                        <li>Skills can run inside your platform, inside an agent, or as shared modules.</li>
+                        <li>Each skill orchestrates context retrieval, signal retrieval, analysis, and interpretation.</li>
                     </ul>
                 </div>
                 <div class="architecture-panel">
-                    <h3>Built for Teams</h3>
+                    <h3>Human-Agent Collaboration Loop</h3>
                     <ul class="arc-list">
-                        <li>Collaborate in the same canvas with clear run history.</li>
-                        <li>Hand off work without losing context or settings.</li>
-                        <li>Review, reproduce, and approve together.</li>
+                        <li>Scientist action updates experiment state and runtime outputs.</li>
+                        <li>Signals are recompiled and surfaced to the reasoning agent.</li>
+                        <li>Agent proposes hypotheses and suggestions; scientist accepts or edits.</li>
                     </ul>
                 </div>
             </div>
             <div class="product-vision">
-                <h3>Built for Real Lab Work</h3>
-                <p>A single place to analyze data, capture methods, and share results.</p>
+                <h3>Why This Structure Enables Portability</h3>
+                <p>The core system is infrastructure. Agents connect through the API, so reasoning can evolve without rewriting scientific execution.</p>
                 <div class="product-grid">
                     <div class="product-card">
-                        <h4>Who We Serve</h4>
+                        <h4>Mental Model</h4>
                         <ul>
-                            <li><strong>Researchers:</strong> need interactive tools that keep context intact.</li>
-                            <li><strong>Lab leads:</strong> want reproducible runs and clear oversight.</li>
-                            <li><strong>Bioinformatics teams:</strong> need speed without losing rigor.</li>
+                            <li><strong>Runtime:</strong> executes scientific compute.</li>
+                            <li><strong>State:</strong> tracks the experiment.</li>
+                            <li><strong>Agent:</strong> interprets signals and context.</li>
                         </ul>
                     </div>
-                    <div class="product-card">
-                        <h4>Why It Matters</h4>
+                    <div class="product-card" id="platform">
+                        <h4>Long-Term Direction</h4>
                         <ul>
-                            <li>Stop losing time to manual handoffs and mismatched files.</li>
-                            <li>Make results easy to reproduce and defend.</li>
-                            <li>Turn every run into knowledge your team can reuse.</li>
+                            <li>Start with flow cytometry and structured experiment execution.</li>
+                            <li>Expand compute nodes to broader biological modalities over time.</li>
+                            <li>Evolve into an AI-native scientific runtime for programmable experiments.</li>
+                            <li>Support many agents the way databases support many applications.</li>
                         </ul>
                     </div>
                 </div>
@@ -295,18 +329,17 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="contact-content">
                 <div class="contact-info">
-                    <h2>Let's Connect</h2>
-                    <p>Ready to see the workspace in action? Request a walkthrough tailored to your lab’s workflows.</p>
+                    <h2>Connect With Us</h2>
+                    <p>We are building portable scientific infrastructure for agent-assisted biology. If you want to integrate your agent or pilot this in real workflows, reach out.</p>
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
-                                <h4>Email Us</h4>
+                                <h4>Email</h4>
                                 <a href="mailto:contact@complexity-ai.com">contact@complexity-ai.com</a>
                             </div>
                         </div>
@@ -337,14 +370,14 @@
                         <div class="form-group">
                             <select required>
                                 <option value="">Select Interest</option>
-                                <option value="partnership">Lab Partnership</option>
-                                <option value="investment">Investment Opportunity</option>
-                                <option value="collaboration">Research Collaboration</option>
+                                <option value="integration">Agent Integration</option>
+                                <option value="pilot">Pilot Deployment</option>
+                                <option value="partnership">Research Partnership</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Tell us about your interest in Complexity AI" rows="4" required></textarea>
+                            <textarea placeholder="Tell us about your runtime or experiment workflow" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">
                             <i class="fas fa-paper-plane"></i>
@@ -356,7 +389,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -365,24 +397,24 @@
                         <i class="fas fa-cube"></i>
                         <span>Complexity LLC</span>
                     </div>
-                    <p>Building a glass‑box scientific workspace so teams can operate, explain, and reproduce every run.</p>
+                    <p>Building the portable runtime layer for AI-native scientific experiments.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>Company</h4>
-                        <a href="#how-it-works">How It Works</a>
+                        <h4>Overview</h4>
                         <a href="#vision">Vision</a>
-                        <a href="#contact">Contact</a>
+                        <a href="#architecture">Architecture</a>
+                        <a href="#platform">Runtime API</a>
                     </div>
                     <div class="footer-section">
-                        <h4>Get Involved</h4>
-                        <a href="#platform">Platform</a>
+                        <h4>Contact</h4>
                         <a href="#contact">Request Demo</a>
+                        <a href="mailto:contact@complexity-ai.com">Email</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Complexity LLC. All rights reserved.</p>
+                <p>&copy; 2026 Complexity LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
