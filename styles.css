@@ -111,9 +111,11 @@ html {
     color: var(--gray-900);
 }
 
-.nav-logo i {
+.nav-logo .datalox-mark-icon {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
 }
 
 .nav-menu {
@@ -947,9 +949,11 @@ html {
     margin-bottom: var(--spacing-md);
 }
 
-.footer-logo i {
+.footer-logo .datalox-mark-icon {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
 }
 
 .footer-brand p {
