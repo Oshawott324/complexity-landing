@@ -949,11 +949,9 @@ html {
     margin-bottom: var(--spacing-md);
 }
 
-.footer-logo .datalox-mark-icon {
+.footer-logo i {
     color: var(--primary-color);
-    width: 1.5rem;
-    height: 1.5rem;
-    flex-shrink: 0;
+    font-size: 1.5rem;
 }
 
 .footer-brand p {
