@@ -9,15 +9,13 @@
     <meta property="og:description" content="Live domain MCP environments and replay-backed API/MCP snapshots for reproducible agent training, eval, and regression worlds.">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" media="print" onload="this.media='all'">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <!-- <i class="fas fa-cube"></i> -->
+            <a href="#top" class="nav-logo" aria-label="Datalox home">
                 <svg
                     class="datalox-mark-icon"
                     viewBox="0 0 24 24"
@@ -34,7 +32,10 @@
                     <path d="M18 15h3"></path>
                 </svg>
                 <span>Datalox</span>
-            </div>
+            </a>
+            <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="nav-menu">
                 <a href="#environments" class="nav-link">Environments</a>
                 <a href="#fixtures" class="nav-link">Fixtures</a>
@@ -48,357 +49,366 @@
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-layer-group"></i>
-                    <span>Versioned task worlds for tool-using agents</span>
-                </div>
-                <h1 class="hero-title">Versioned agent task environments.</h1>
-                <p class="hero-description">
-                    Datalox provides live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible agent training, eval, and regression.
-                </p>
-                <div class="hero-highlights">
-                    <div class="highlight-pill"><i class="fas fa-cubes"></i> Published fixture worlds</div>
-                    <div class="highlight-pill"><i class="fas fa-flask-vial"></i> Live domain MCP envs</div>
-                    <div class="highlight-pill"><i class="fas fa-lock"></i> Private versioned snapshots</div>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#environments" class="btn btn-primary">
-                        <i class="fas fa-compass"></i>
-                        Explore Environments
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-box-open"></i>
-                        Bring a Task World
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual" aria-label="Versioned world anatomy">
-                <div class="world-panel">
-                    <div class="panel-toolbar">
-                        <div class="panel-dots" aria-hidden="true">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <span>github-pr-review@2026-05.0</span>
+    <main id="top">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Versioned task worlds for tool-using agents</span>
                     </div>
-                    <div class="world-map">
-                        <div class="world-core">
-                            <span class="step-label">versioned world</span>
-                            <strong>coding-review-ci-basic</strong>
-                            <code>fixture set + replay runtime</code>
-                        </div>
-                        <div class="world-node tools">
-                            <i class="fas fa-screwdriver-wrench"></i>
-                            <span>Tool catalog</span>
-                        </div>
-                        <div class="world-node observations">
-                            <i class="fas fa-database"></i>
-                            <span>Observations</span>
-                        </div>
-                        <div class="world-node tasks">
-                            <i class="fas fa-list-check"></i>
-                            <span>Task specs</span>
-                        </div>
-                        <div class="world-node verifiers">
-                            <i class="fas fa-scale-balanced"></i>
-                            <span>Verifier metadata</span>
-                        </div>
-                        <div class="world-node trust">
-                            <i class="fas fa-shield-halved"></i>
-                            <span>Checksums</span>
-                        </div>
-                        <div class="world-node exports">
-                            <i class="fas fa-code-branch"></i>
-                            <span>SFT/eval exports</span>
-                        </div>
+                    <h1 class="hero-title">Versioned agent task environments.</h1>
+                    <p class="hero-description">
+                        Datalox provides live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible agent training, eval, and regression.
+                    </p>
+                    <div class="hero-highlights">
+                        <div class="highlight-pill"><i class="fas fa-cubes"></i> Published fixture worlds</div>
+                        <div class="highlight-pill"><i class="fas fa-flask-vial"></i> Live domain MCP envs</div>
+                        <div class="highlight-pill"><i class="fas fa-lock"></i> Private versioned snapshots</div>
                     </div>
-                    <div class="panel-footer">
-                        <span><i class="fas fa-plug-circle-check"></i> Live upstream off</span>
-                        <span><i class="fas fa-fingerprint"></i> Request hash</span>
-                        <span><i class="fas fa-circle-exclamation"></i> Explicit misses</span>
+                    <div class="hero-buttons">
+                        <a href="#environments" class="btn btn-primary">
+                            <i class="fas fa-compass"></i>
+                            Explore Environments
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-box-open"></i>
+                            Bring a Task World
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="environments" class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-kicker">Environment Types</span>
-                <h2>Two ways to give agents a stable world.</h2>
-                <p>Datalox separates live domain environments from replay-backed snapshots so teams can choose the right boundary for training, eval, and regression.</p>
-            </div>
-            <div class="how-grid">
-                <div class="how-card live-env reveal">
-                    <div class="card-icon active"><i class="fas fa-flask-vial"></i></div>
-                    <h3>Live domain MCP environments</h3>
-                    <p>Constrained Datalox-owned workspaces where agents do real domain work through MCP tools.</p>
-                    <ul class="how-list">
-                        <li>Flow cytometry, molecule biology, and protein visualization workspaces.</li>
-                        <li>Domain files, parsers, validation, revisions, and compact UIs stay in the live env repo.</li>
-                        <li>Rollouts can emit replay evidence for training and eval exports.</li>
-                    </ul>
-                </div>
-                <div class="how-card snapshot-env reveal">
-                    <div class="card-icon active-green"><i class="fas fa-box-archive"></i></div>
-                    <h3>Replay-backed API/MCP snapshots</h3>
-                    <p>Frozen fixture worlds that replay observed tool catalogs, requests, observations, tasks, and verifier metadata.</p>
-                    <ul class="how-list">
-                        <li>Install a pinned fixture or fixture set by version.</li>
-                        <li>Serve recorded observations with live upstream off.</li>
-                        <li>Return explicit replay misses instead of inventing unseen behavior.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="modes" class="advantages">
-        <div class="container">
-            <div id="how-it-works" class="section-header">
-                <span class="section-kicker">User Modes</span>
-                <h2>Use a published world, run live, or create your own.</h2>
-                <p>Recording is one authoring path. Most users should start by consuming a versioned environment.</p>
-            </div>
-            <div class="advantage-grid mode-grid">
-                <div class="advantage-card reveal">
-                    <span class="adv-number">A</span>
-                    <h3>Use a published fixture</h3>
-                    <p>Install a pinned fixture world such as <code>github-pr-review-basic@2026-05.0</code> and run agents against deterministic replay.</p>
-                </div>
-                <div class="advantage-card reveal">
-                    <span class="adv-number">B</span>
-                    <h3>Use a live domain env</h3>
-                    <p>Give agents access to a Datalox-owned MCP workspace for domain work, then capture rollout evidence when useful.</p>
-                </div>
-                <div class="advantage-card reveal">
-                    <span class="adv-number">C</span>
-                    <h3>Create a private fixture</h3>
-                    <p>Route one rollout through the recording proxy, pack exact tool observations, and keep the fixture private or approved for sharing.</p>
-                </div>
-            </div>
-            <div class="code-band reveal" role="img" aria-label="Datalox environment consumption model">
-                <span>fixture set</span>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                <span>replay runtime</span>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                <span>agent run</span>
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                <span>training/eval exports</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="world" class="vision">
-        <div class="container">
-            <div class="vision-content">
-                <div class="vision-text">
-                    <span class="section-kicker">Inside A World</span>
-                    <h2>A versioned world is more than a trace.</h2>
-                    <p class="vision-subtitle">Each replay-backed environment packages the stable pieces an agent needs to run the same task world again.</p>
-                    <div class="vision-points">
-                        <div class="vision-point reveal">
-                            <div class="point-number">T</div>
-                            <div class="point-content">
-                                <h4>Tools and observations</h4>
-                                <p>Frozen MCP tool catalogs, exact requests, exact observations, request hashes, and sequence indexes.</p>
+                <div class="hero-visual" aria-label="Versioned world anatomy">
+                    <div class="world-panel">
+                        <div class="panel-toolbar">
+                            <div class="panel-dots" aria-hidden="true">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span>github-pr-review@2026-05.0</span>
+                        </div>
+                        <div class="world-map">
+                            <div class="world-core">
+                                <span class="step-label">versioned world</span>
+                                <strong>coding-review-ci-basic</strong>
+                                <code>fixture set + replay runtime</code>
+                            </div>
+                            <div class="world-node tools">
+                                <i class="fas fa-screwdriver-wrench"></i>
+                                <span>Tool catalog</span>
+                            </div>
+                            <div class="world-node observations">
+                                <i class="fas fa-database"></i>
+                                <span>Observations</span>
+                            </div>
+                            <div class="world-node tasks">
+                                <i class="fas fa-list-check"></i>
+                                <span>Task specs</span>
+                            </div>
+                            <div class="world-node verifiers">
+                                <i class="fas fa-scale-balanced"></i>
+                                <span>Verifier metadata</span>
+                            </div>
+                            <div class="world-node trust">
+                                <i class="fas fa-shield-halved"></i>
+                                <span>Checksums</span>
+                            </div>
+                            <div class="world-node exports">
+                                <i class="fas fa-code-branch"></i>
+                                <span>SFT/eval exports</span>
                             </div>
                         </div>
-                        <div class="vision-point reveal">
-                            <div class="point-number">S</div>
-                            <div class="point-content">
-                                <h4>Tasks and verifier metadata</h4>
-                                <p>Task specs, scaffold specs, verifier refs, reference rubrics, and replay miss rules preserved as metadata.</p>
-                            </div>
+                        <div class="panel-footer">
+                            <span><i class="fas fa-plug-circle-check"></i> Live upstream off</span>
+                            <span><i class="fas fa-fingerprint"></i> Request hash</span>
+                            <span><i class="fas fa-circle-exclamation"></i> Explicit misses</span>
                         </div>
-                        <div class="vision-point reveal">
-                            <div class="point-number">V</div>
-                            <div class="point-content">
-                                <h4>Versioning and trust</h4>
-                                <p>Replay bundles, checksums, export gates, train/dev/test splits, and optional SFT or eval derivatives.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="world-detail-panel reveal">
-                    <div class="panel-toolbar">
-                        <div class="panel-dots" aria-hidden="true">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <span>fixture-world.manifest</span>
-                    </div>
-                    <div class="manifest-list">
-                        <div><strong>tools</strong><span>github, shell, repo files</span></div>
-                        <div><strong>observations</strong><span>recorded tool results</span></div>
-                        <div><strong>tasks</strong><span>review PR, inspect CI, cite risks</span></div>
-                        <div><strong>verifiers</strong><span>evidence and rubric metadata</span></div>
-                        <div><strong>trust</strong><span>checksums, export gate, provenance</span></div>
-                        <div><strong>splits</strong><span>train, dev, test task membership</span></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="fixtures" class="architecture">
-        <div class="container">
-            <div class="section-header">
-                <h2>Full Architecture</h2>
-                <p>From measurement to interpretation, each stage is explicit and replaceable.</p>
-            </div>
-            <div class="tl-grid">
-                <div class="tl-card">
-                    <h3>Runtime Responsibilities</h3>
-                    <p>Deterministic computation, reproducibility, caching, and scalable execution for scientific workflows.</p>
+        <section id="environments" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">Environment Types</span>
+                    <h2>Two ways to give agents a stable world.</h2>
+                    <p>Datalox separates live domain environments from replay-backed snapshots so teams can choose the right boundary for training, eval, and regression.</p>
                 </div>
-                <div class="tl-card">
-                    <h3>Experiment Representation</h3>
-                    <p>An explicit experiment graph containing samples, conditions, gating trees, and derived populations.</p>
-                </div>
-                <div class="tl-card">
-                    <h3>Evidence Extraction</h3>
-                    <p>Compile raw outputs into reusable signals: PopulationChange, MarkerShift, DistributionShift, GateShift.</p>
-                </div>
-                <div class="tl-card">
-                    <h3>Agent-Agnostic Interface</h3>
-                    <p>Expose runtime operations through a stable tool surface that any agent can call.</p>
-                </div>
-            </div>
-            <div class="architecture-panels">
-                <div class="architecture-panel">
-                    <h3>Portable Runtime API</h3>
-                    <ul class="arc-list">
-                        <li>Initialize and manage experiment state across samples, conditions, and analysis history.</li>
-                        <li>Run scientific workflows for gating, transforms, clustering, and population statistics.</li>
-                        <li>Return structured evidence so external agents can interpret results and reason on top.</li>
-                    </ul>
-                </div>
-                <div class="architecture-panel">
-                    <h3>Skills Layer</h3>
-                    <ul class="arc-list">
-                        <li>Reusable workflows such as QC analysis and immune population annotation.</li>
-                        <li>Skills can run inside your platform, inside an agent, or as shared modules.</li>
-                        <li>Each skill orchestrates context retrieval, signal retrieval, analysis, and interpretation.</li>
-                    </ul>
-                </div>
-                <div class="architecture-panel">
-                    <h3>Human-Agent Collaboration Loop</h3>
-                    <ul class="arc-list">
-                        <li>Scientist action updates experiment state and runtime outputs.</li>
-                        <li>Signals are recompiled and surfaced to the reasoning agent.</li>
-                        <li>Agent proposes hypotheses and suggestions; scientist accepts or edits.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="product-vision">
-                <h3>Why This Structure Enables Portability</h3>
-                <p>The core system is infrastructure. Agents connect through the API, so reasoning can evolve without rewriting scientific execution.</p>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <h4>Mental Model</h4>
-                        <ul>
-                            <li><strong>Runtime:</strong> executes scientific compute.</li>
-                            <li><strong>State:</strong> tracks the experiment.</li>
-                            <li><strong>Agent:</strong> interprets signals and context.</li>
+                <div class="how-grid">
+                    <div class="how-card live-env reveal">
+                        <div class="card-icon active"><i class="fas fa-flask-vial"></i></div>
+                        <h3>Live domain MCP environments</h3>
+                        <p>Constrained Datalox-owned workspaces where agents do real domain work through MCP tools.</p>
+                        <ul class="how-list">
+                            <li>Flow cytometry, molecule biology, and protein visualization workspaces.</li>
+                            <li>Domain files, parsers, validation, revisions, and compact UIs stay in the live env repo.</li>
+                            <li>Rollouts can emit replay evidence for training and eval exports.</li>
                         </ul>
                     </div>
-                    <div class="product-card" id="platform">
-                        <h4>Long-Term Direction</h4>
-                        <ul>
-                            <li>Start with flow cytometry and structured experiment execution.</li>
-                            <li>Expand compute nodes to broader biological modalities over time.</li>
-                            <li>Evolve into an AI-native scientific runtime for programmable experiments.</li>
-                            <li>Support many agents the way databases support many applications.</li>
+                    <div class="how-card snapshot-env reveal">
+                        <div class="card-icon active-green"><i class="fas fa-box-archive"></i></div>
+                        <h3>Replay-backed API/MCP snapshots</h3>
+                        <p>Frozen fixture worlds that replay observed tool catalogs, requests, observations, tasks, and verifier metadata.</p>
+                        <ul class="how-list">
+                            <li>Install a pinned fixture or fixture set by version.</li>
+                            <li>Serve recorded observations with live upstream off.</li>
+                            <li>Return explicit replay misses instead of inventing unseen behavior.</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h2>Connect With Us</h2>
-                    <p>We are building portable scientific infrastructure for agent-assisted biology. If you want to integrate your agent or pilot this in real workflows, reach out.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <a href="mailto:contact@complexity-ai.com">contact@complexity-ai.com</a>
+        <section id="modes" class="advantages">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">User Modes</span>
+                    <h2>Use a published world, run live, or create your own.</h2>
+                    <p>Recording is one authoring path. Most users should start by consuming a versioned environment.</p>
+                </div>
+                <div class="advantage-grid mode-grid">
+                    <div class="advantage-card reveal">
+                        <span class="adv-number">A</span>
+                        <h3>Use a published fixture</h3>
+                        <p>Install a pinned fixture world such as <code>github-pr-review-basic@2026-05.0</code> and run agents against deterministic replay.</p>
+                    </div>
+                    <div class="advantage-card reveal">
+                        <span class="adv-number">B</span>
+                        <h3>Use a live domain env</h3>
+                        <p>Give agents access to a Datalox-owned MCP workspace for domain work, then capture rollout evidence when useful.</p>
+                    </div>
+                    <div class="advantage-card reveal">
+                        <span class="adv-number">C</span>
+                        <h3>Create a private fixture</h3>
+                        <p>Route one rollout through the recording proxy, pack exact tool observations, and keep the fixture private or approved for sharing.</p>
+                    </div>
+                </div>
+                <div class="code-band reveal" role="img" aria-label="Datalox environment consumption model">
+                    <span>fixture set</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>replay runtime</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>agent run</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>training/eval exports</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="world" class="vision">
+            <div class="container">
+                <div class="vision-content">
+                    <div class="vision-text">
+                        <span class="section-kicker">Inside A World</span>
+                        <h2>A versioned world is more than a trace.</h2>
+                        <p class="vision-subtitle">Each replay-backed environment packages the stable pieces an agent needs to run the same task world again.</p>
+                        <div class="vision-points">
+                            <div class="vision-point reveal">
+                                <div class="point-number">T</div>
+                                <div class="point-content">
+                                    <h4>Tools and observations</h4>
+                                    <p>Frozen MCP tool catalogs, exact requests, exact observations, request hashes, and sequence indexes.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-building"></i>
-                            <div>
-                                <h4>Company</h4>
-                                <p>Complexity LLC</p>
+                            <div class="vision-point reveal">
+                                <div class="point-number">S</div>
+                                <div class="point-content">
+                                    <h4>Tasks and verifier metadata</h4>
+                                    <p>Task specs, scaffold specs, verifier refs, reference rubrics, and replay miss rules preserved as metadata.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-calendar"></i>
-                            <div>
-                                <h4>Founded</h4>
-                                <p>2025</p>
+                            <div class="vision-point reveal">
+                                <div class="point-number">V</div>
+                                <div class="point-content">
+                                    <h4>Versioning and trust</h4>
+                                    <p>Replay bundles, checksums, export gates, train/dev/test splits, and optional SFT or eval derivatives.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="contact-form">
-                    <form class="form">
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                    <div class="world-detail-panel reveal">
+                        <div class="panel-toolbar">
+                            <div class="panel-dots" aria-hidden="true">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span>fixture-world.manifest</span>
                         </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
+                        <div class="manifest-list">
+                            <div><strong>tools</strong><span>github, shell, repo files</span></div>
+                            <div><strong>observations</strong><span>recorded tool results</span></div>
+                            <div><strong>tasks</strong><span>review PR, inspect CI, cite risks</span></div>
+                            <div><strong>verifiers</strong><span>evidence and rubric metadata</span></div>
+                            <div><strong>trust</strong><span>checksums, export gate, provenance</span></div>
+                            <div><strong>splits</strong><span>train, dev, test task membership</span></div>
                         </div>
-                        <div class="form-group">
-                            <select required>
-                                <option value="">Select Interest</option>
-                                <option value="integration">Agent Integration</option>
-                                <option value="pilot">Pilot Deployment</option>
-                                <option value="partnership">Research Partnership</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Tell us about your runtime or experiment workflow" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="fixtures" class="architecture">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">Fixture And Source Coverage</span>
+                    <h2>Published worlds and source surfaces.</h2>
+                    <p>Start from curated fixture families, Datalox-owned domain environments, or your own MCP/API surface.</p>
+                </div>
+                <div class="source-grid reveal" aria-label="Example Datalox worlds and source surfaces">
+                    <div class="source-cell featured"><i class="fab fa-github"></i><span>GitHub PR review</span></div>
+                    <div class="source-cell"><i class="fas fa-code-branch"></i><span>GitHub CI failure</span></div>
+                    <div class="source-cell"><i class="fab fa-slack"></i><span>Slack support thread</span></div>
+                    <div class="source-cell"><i class="fas fa-credit-card"></i><span>Stripe billing edge cases</span></div>
+                    <div class="source-cell"><i class="fas fa-magnifying-glass"></i><span>Search policy corpus</span></div>
+                    <div class="source-cell"><i class="fas fa-calendar-days"></i><span>AppWorld calendar</span></div>
+                    <div class="source-cell"><i class="fas fa-chart-simple"></i><span>Flow cytometry</span></div>
+                    <div class="source-cell"><i class="fas fa-dna"></i><span>Molecule sequence annotation</span></div>
+                    <div class="source-cell"><i class="fas fa-atom"></i><span>Protein viewer snapshot</span></div>
+                    <div class="source-cell"><i class="fas fa-plug"></i><span>Custom MCP</span></div>
+                </div>
+                <p class="source-note">Examples show fixture families and source surfaces, not a generic integration marketplace.</p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="developer-flow">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">How It Works</span>
+                    <h2>Install a world, replay it, or author a private snapshot.</h2>
+                    <p>The core flow is consumption first. Recording exists to create new private snapshots from live environments.</p>
+                </div>
+                <div class="flow-grid">
+                    <div class="cli-card reveal">
+                        <h3>Use a published fixture</h3>
+                        <pre><code>datalox fixtures install github-pr-review-basic@2026-05.0
+datalox replay --fixture github-pr-review-basic@2026-05.0</code></pre>
+                    </div>
+                    <div class="cli-card reveal">
+                        <h3>Use a fixture set</h3>
+                        <pre><code>datalox fixture-sets install support-triage-basic@2026-05.0
+datalox replay --fixture-set support-triage-basic@2026-05.0</code></pre>
+                    </div>
+                    <div class="cli-card reveal">
+                        <h3>Create a private fixture</h3>
+                        <pre><code>datalox proxy --mode record
+datalox bundle pack --bundle-id private-task-world
+datalox replay --bundle .datalox/replay-bundles/private-task-world</code></pre>
+                    </div>
+                </div>
+                <div class="authoring-path reveal">
+                    <span>live MCP/API/domain env</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>agent rollout</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>tool_io_record.v1</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>replay_bundle.v1</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    <span>fixture pack/version</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <span class="section-kicker">Design Partners</span>
+                        <h2>Bring one agent task world.</h2>
+                        <p>We will help identify whether it should be a live domain environment, a replay-backed snapshot, or a private fixture authored from one rollout.</p>
+                        <div class="contact-details">
+                            <div class="contact-item reveal">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <a href="mailto:contact@complexity-ai.com">contact@complexity-ai.com</a>
+                                </div>
+                            </div>
+                            <div class="contact-item reveal">
+                                <i class="fas fa-building"></i>
+                                <div>
+                                    <h4>Company</h4>
+                                    <p>Complexity LLC</p>
+                                </div>
+                            </div>
+                            <div class="contact-item reveal">
+                                <i class="fas fa-calendar"></i>
+                                <div>
+                                    <h4>Founded</h4>
+                                    <p>2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form reveal">
+                        <form class="form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input id="name" name="name" type="text" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" placeholder="you@company.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="interest">Interest</label>
+                                <select id="interest" name="interest" required>
+                                    <option value="">Select interest</option>
+                                    <option value="published-fixture">Published fixture</option>
+                                    <option value="live-domain-mcp-environment">Live domain MCP environment</option>
+                                    <option value="private-fixture-authoring">Private fixture authoring</option>
+                                    <option value="training-eval-exports">Training/eval exports</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="What agent task world are you trying to make reproducible?" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <i class="fas fa-cube"></i>
+                        <svg
+                            class="datalox-mark-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 4v16"></path>
+                            <path d="M5 4c9.5 0 14 2.8 14 8s-4.5 8-14 8"></path>
+                            <path d="M18 9h3"></path>
+                            <path d="M18 15h3"></path>
+                        </svg>
                         <span>Complexity LLC</span>
                     </div>
-                    <p>Building the portable runtime layer for AI-native scientific experiments.</p>
+                    <p>Datalox provides versioned agent task environments: live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible training, eval, and regression.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>Overview</h4>
-                        <a href="#world">World</a>
+                        <h4>Product</h4>
+                        <a href="#environments">Environments</a>
                         <a href="#fixtures">Fixtures</a>
-                        <a href="#platform">Runtime API</a>
+                        <a href="#how-it-works">How It Works</a>
                     </div>
                     <div class="footer-section">
                         <h4>Contact</h4>
