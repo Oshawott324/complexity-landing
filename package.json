@@ -4,7 +4,7 @@
   "description": "Landing page for Datalox versioned agent task environments.",
   "main": "script.js",
   "scripts": {
-    "test": "node --check script.js && node --check api/submit.js"
+    "test": "node --check script.js && node --check api/submit.js && node scripts/check-site-content.js"
   },
   "repository": {
     "type": "git",

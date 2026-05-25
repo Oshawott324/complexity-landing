@@ -81,6 +81,22 @@
                                 "@type": "Answer",
                                 "text": "Yes. A team can run an approved agent rollout through the recording path once, pack the observed tool/API behavior into a replay bundle, and keep the resulting fixture private."
                             }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "What does \"versioned\" mean in Datalox?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "In Datalox, versioned means the task world is pinned to a named fixture or fixture set with stable tool catalogs, observations, task metadata, verifier metadata, checksums, provenance, and split membership."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "How do teams verify that a replay world matches the original environment?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Teams verify replay faithfulness by checking request hashes, sequence indexes, recorded observations, checksums, provenance, verifier metadata, and explicit replay misses against the original approved rollout."
+                            }
                         }
                     ]
                 }
@@ -449,6 +465,14 @@ datalox replay --bundle .datalox/replay-bundles/private-task-world</code></pre>
                     <article class="faq-item reveal">
                         <h3>Can a team create a private fixture?</h3>
                         <p>Yes. A team can run an approved agent rollout through the recording path once, pack the observed tool/API behavior into a replay bundle, and keep the resulting fixture private.</p>
+                    </article>
+                    <article class="faq-item reveal">
+                        <h3>What does "versioned" mean in Datalox?</h3>
+                        <p>In Datalox, versioned means the task world is pinned to a named fixture or fixture set with stable tool catalogs, observations, task metadata, verifier metadata, checksums, provenance, and split membership.</p>
+                    </article>
+                    <article class="faq-item reveal">
+                        <h3>How do teams verify that a replay world matches the original environment?</h3>
+                        <p>Teams verify replay faithfulness by checking request hashes, sequence indexes, recorded observations, checksums, provenance, verifier metadata, and explicit replay misses against the original approved rollout.</p>
                     </article>
                 </div>
             </div>
