@@ -126,174 +126,121 @@
         </div>
     </section>
 
-    <section id="how-it-works" class="how-it-works">
+    <section id="environments" class="how-it-works">
         <div class="container">
             <div class="section-header">
-                <h2>Core Design Principle</h2>
-                <p>Keep compute, state, meaning, and reasoning as separate layers with explicit boundaries.</p>
+                <span class="section-kicker">Environment Types</span>
+                <h2>Two ways to give agents a stable world.</h2>
+                <p>Datalox separates live domain environments from replay-backed snapshots so teams can choose the right boundary for training, eval, and regression.</p>
             </div>
             <div class="how-grid">
-                <div class="how-card old-way">
-                    <h3>Tightly Coupled Assistant Pattern</h3>
-                    <p>When compute and reasoning are mixed together, systems become hard to port, inspect, and reproduce.</p>
+                <div class="how-card live-env reveal">
+                    <div class="card-icon active"><i class="fas fa-flask-vial"></i></div>
+                    <h3>Live domain MCP environments</h3>
+                    <p>Constrained Datalox-owned workspaces where agents do real domain work through MCP tools.</p>
                     <ul class="how-list">
-                        <li>The assistant owns both execution and interpretation.</li>
-                        <li>Manual state is hidden in prompts or transient context.</li>
-                        <li>Changing agents means rebuilding the stack.</li>
+                        <li>Flow cytometry, molecule biology, and protein visualization workspaces.</li>
+                        <li>Domain files, parsers, validation, revisions, and compact UIs stay in the live env repo.</li>
+                        <li>Rollouts can emit replay evidence for training and eval exports.</li>
                     </ul>
                 </div>
-                <div class="how-card new-way">
-                    <h3>Portable Runtime Pattern</h3>
-                    <p>The runtime executes science. The state tracks experiments. Agents reason on top through a stable API.</p>
+                <div class="how-card snapshot-env reveal">
+                    <div class="card-icon active-green"><i class="fas fa-box-archive"></i></div>
+                    <h3>Replay-backed API/MCP snapshots</h3>
+                    <p>Frozen fixture worlds that replay observed tool catalogs, requests, observations, tasks, and verifier metadata.</p>
                     <ul class="how-list">
-                        <li>Runtime handles deterministic and reproducible computation.</li>
-                        <li>Experiment state preserves gates, groups, conditions, and history.</li>
-                        <li>Any agent can plug in and reason without owning execution.</li>
+                        <li>Install a pinned fixture or fixture set by version.</li>
+                        <li>Serve recorded observations with live upstream off.</li>
+                        <li>Return explicit replay misses instead of inventing unseen behavior.</li>
                     </ul>
-                    <div class="cell-pills">
-                        <span class="cell-pill"><i class="fas fa-cpu"></i> Compute</span>
-                        <span class="cell-pill"><i class="fas fa-folder-tree"></i> State</span>
-                        <span class="cell-pill"><i class="fas fa-dna"></i> Meaning</span>
-                        <span class="cell-pill"><i class="fas fa-lightbulb"></i> Reasoning</span>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="advantages">
+    <section id="modes" class="advantages">
         <div class="container">
             <div class="section-header">
-                <h2>What Each Layer Owns</h2>
-                <p>Each concern has one job and one source of truth.</p>
+                <span class="section-kicker">User Modes</span>
+                <h2>Use a published world, run live, or create your own.</h2>
+                <p>Recording is one authoring path. Most users should start by consuming a versioned environment.</p>
             </div>
-            <div class="advantage-grid">
-                <div class="advantage-card">
-                    <span class="adv-number">01</span>
-                    <h3>Compute</h3>
-                    <p>Node-graph execution for transformations, clustering, gating, and stats with deterministic outputs and caching.</p>
+            <div class="advantage-grid mode-grid">
+                <div class="advantage-card reveal">
+                    <span class="adv-number">A</span>
+                    <h3>Use a published fixture</h3>
+                    <p>Install a pinned fixture world such as <code>github-pr-review-basic@2026-05.0</code> and run agents against deterministic replay.</p>
                 </div>
-                <div class="advantage-card">
-                    <span class="adv-number">02</span>
-                    <h3>State</h3>
-                    <p>Experiment structure that tracks samples, conditions, manual gates, populations, and full analysis history.</p>
+                <div class="advantage-card reveal">
+                    <span class="adv-number">B</span>
+                    <h3>Use a live domain env</h3>
+                    <p>Give agents access to a Datalox-owned MCP workspace for domain work, then capture rollout evidence when useful.</p>
                 </div>
-                <div class="advantage-card">
-                    <span class="adv-number">03</span>
-                    <h3>Meaning</h3>
-                    <p>Biological entities convert measurement space into interpretable objects such as populations, phenotypes, and comparisons.</p>
+                <div class="advantage-card reveal">
+                    <span class="adv-number">C</span>
+                    <h3>Create a private fixture</h3>
+                    <p>Route one rollout through the recording proxy, pack exact tool observations, and keep the fixture private or approved for sharing.</p>
                 </div>
-                <div class="advantage-card">
-                    <span class="adv-number">04</span>
-                    <h3>Reasoning</h3>
-                    <p>Agents consume structured signals and context to generate hypotheses, explanations, and next-step suggestions.</p>
-                </div>
+            </div>
+            <div class="code-band reveal" role="img" aria-label="Datalox environment consumption model">
+                <span>fixture set</span>
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                <span>replay runtime</span>
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                <span>agent run</span>
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                <span>training/eval exports</span>
             </div>
         </div>
     </section>
 
-    <section id="vision" class="vision">
+    <section id="world" class="vision">
         <div class="container">
             <div class="vision-content">
                 <div class="vision-text">
-                    <h2>Our Vision</h2>
-                    <p class="vision-subtitle">A portable scientific runtime for biological experiments, designed to be agent-agnostic.</p>
+                    <span class="section-kicker">Inside A World</span>
+                    <h2>A versioned world is more than a trace.</h2>
+                    <p class="vision-subtitle">Each replay-backed environment packages the stable pieces an agent needs to run the same task world again.</p>
                     <div class="vision-points">
-                        <div class="vision-point">
-                            <div class="point-number">01</div>
+                        <div class="vision-point reveal">
+                            <div class="point-number">T</div>
                             <div class="point-content">
-                                <h4>Data Layer</h4>
-                                <p>Raw measurements only: FCS files, microscopy images, sequencing counts, protein sequences.</p>
+                                <h4>Tools and observations</h4>
+                                <p>Frozen MCP tool catalogs, exact requests, exact observations, request hashes, and sequence indexes.</p>
                             </div>
                         </div>
-                        <div class="vision-point">
-                            <div class="point-number">02</div>
+                        <div class="vision-point reveal">
+                            <div class="point-number">S</div>
                             <div class="point-content">
-                                <h4>Scientific Execution Runtime</h4>
-                                <p>Operation graph for load, compensate, transform, cluster, gate, and compute statistics.</p>
+                                <h4>Tasks and verifier metadata</h4>
+                                <p>Task specs, scaffold specs, verifier refs, reference rubrics, and replay miss rules preserved as metadata.</p>
                             </div>
                         </div>
-                        <div class="vision-point">
-                            <div class="point-number">03</div>
+                        <div class="vision-point reveal">
+                            <div class="point-number">V</div>
                             <div class="point-content">
-                                <h4>Experiment State + Biological Entities</h4>
-                                <p>Track scientist actions, then map numbers into populations, marker profiles, and phenotypes.</p>
-                            </div>
-                        </div>
-                        <div class="vision-point">
-                            <div class="point-number">04</div>
-                            <div class="point-content">
-                                <h4>Signal Compiler</h4>
-                                <p>Emit structured evidence like frequency changes, marker shifts, gate shifts, and outlier scores.</p>
+                                <h4>Versioning and trust</h4>
+                                <p>Replay bundles, checksums, export gates, train/dev/test splits, and optional SFT or eval derivatives.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="vision-visual">
-                    <div class="timeline">
-                        <div class="timeline-item active">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 1: Data</h5>
-                                <p>Store measurements, no interpretation.</p>
-                            </div>
+                <div class="world-detail-panel reveal">
+                    <div class="panel-toolbar">
+                        <div class="panel-dots" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 2: Scientific Runtime</h5>
-                                <p>Deterministic compute engine.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 3: Experiment State</h5>
-                                <p>Samples, gates, conditions, history.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 4: Biological Entities</h5>
-                                <p>Population and phenotype objects.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 5: Signal Compiler</h5>
-                                <p>Structured evidence, not conclusions.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 6: Runtime API</h5>
-                                <p>Stable tool interface for any agent.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 7: Skills</h5>
-                                <p>Reusable analysis workflows.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 8: Agent</h5>
-                                <p>Interpretation, hypotheses, suggestions.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h5>Layer 9: UI</h5>
-                                <p>Scientist and agent collaborate in the loop.</p>
-                            </div>
-                        </div>
+                        <span>fixture-world.manifest</span>
+                    </div>
+                    <div class="manifest-list">
+                        <div><strong>tools</strong><span>github, shell, repo files</span></div>
+                        <div><strong>observations</strong><span>recorded tool results</span></div>
+                        <div><strong>tasks</strong><span>review PR, inspect CI, cite risks</span></div>
+                        <div><strong>verifiers</strong><span>evidence and rubric metadata</span></div>
+                        <div><strong>trust</strong><span>checksums, export gate, provenance</span></div>
+                        <div><strong>splits</strong><span>train, dev, test task membership</span></div>
                     </div>
                 </div>
             </div>
