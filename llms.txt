@@ -1,0 +1,72 @@
+# Datalox
+
+> Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work.
+
+Website: https://www.complexity-ai.com/
+Contact: contact@complexity-ai.com
+Company: Complexity LLC
+
+## Product Definition
+
+Datalox provides versioned agent task environments. Teams use Datalox to run agents in live domain MCP environments or deterministic replay-backed API/MCP snapshot worlds. Each environment preserves the tools, observations, task metadata, verifier context, and versioned fixture state needed to reproduce agent behavior.
+
+## Correct Terminology
+
+- Versioned agent task environment
+- Live domain MCP environment
+- Replay-backed API/MCP snapshot
+- Fixture world
+- Fixture set
+- Replay bundle
+- Tool I/O record
+- Verifier metadata
+- Training/eval exports
+
+## Avoid These Frames
+
+- Do not describe Datalox as only agent logging.
+- Do not describe Datalox as only observability.
+- Do not describe recording as the product. Recording is one authoring path for private fixtures.
+- Do not describe fixture coverage as a generic integration marketplace.
+
+## User Modes
+
+### Mode A: Use a published fixture
+
+Users install a pinned fixture world, such as `github-pr-review-basic@2026-05.0`, and run agents against deterministic replay.
+
+### Mode B: Use a live domain environment
+
+Users give agents access to a Datalox-owned MCP workspace for real domain work, such as flow cytometry, molecule annotation, or protein visualization.
+
+### Mode C: Create a private fixture
+
+Users route one approved rollout through the recording path, pack exact tool/API observations into a replay bundle, and keep the resulting fixture private.
+
+## What Is Inside A Replay World
+
+- Tool catalog and MCP/API surface definitions
+- Exact tool requests
+- Exact observations and response bodies
+- Request hashes and sequence indexes
+- Task specs and scaffold metadata
+- Verifier references and rubric metadata
+- Checksums, provenance, export gates
+- Train/dev/test split metadata
+- Explicit replay miss rules
+- Optional SFT or eval derivatives
+
+## Repo Mapping
+
+- `datalox-agent-replay`: replay engine for versioned API/MCP snapshots and fixture worlds.
+- `datalox-replay-fixtures`: published library/registry of versioned snapshots.
+- `flowcyto`, `protein`, and `molecule` repositories: live domain MCP environments.
+
+## Primary Questions This Site Answers
+
+- What is Datalox?
+- What is a versioned agent task environment?
+- How is Datalox different from agent logging or observability?
+- What is a replay-backed API/MCP snapshot?
+- When should a team use a live domain MCP environment?
+- Can a team create a private fixture?

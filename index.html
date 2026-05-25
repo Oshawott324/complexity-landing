@@ -4,13 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datalox - Versioned Agent Task Environments</title>
-    <meta name="description" content="Datalox provides versioned agent task environments: live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible training, eval, and regression.">
+    <meta name="description" content="Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work with live domain MCP environments and replay-backed API/MCP snapshot worlds.">
     <meta property="og:title" content="Datalox - Versioned Agent Task Environments">
     <meta property="og:description" content="Live domain MCP environments and replay-backed API/MCP snapshots for reproducible agent training, eval, and regression worlds.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.complexity-ai.com/">
+    <link rel="canonical" href="https://www.complexity-ai.com/">
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Datalox agent-readable summary">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://www.complexity-ai.com/#organization",
+                    "name": "Complexity LLC",
+                    "url": "https://www.complexity-ai.com/",
+                    "email": "contact@complexity-ai.com",
+                    "foundingDate": "2025"
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "@id": "https://www.complexity-ai.com/#datalox",
+                    "name": "Datalox",
+                    "applicationCategory": "DeveloperApplication",
+                    "operatingSystem": "CLI and MCP-compatible agent environments",
+                    "url": "https://www.complexity-ai.com/",
+                    "provider": {
+                        "@id": "https://www.complexity-ai.com/#organization"
+                    },
+                    "description": "Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work through live domain MCP environments and replay-backed API/MCP snapshot worlds."
+                },
+                {
+                    "@type": "FAQPage",
+                    "@id": "https://www.complexity-ai.com/#faq",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "What is a versioned agent task environment?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "A versioned agent task environment is a pinned world an AI agent can act in repeatedly. It defines the available tools, task context, observations, verifier metadata, and versioned fixture state needed to reproduce or evaluate agent behavior."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "How is Datalox different from agent logging or observability?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Agent logging records what happened in one run. Datalox turns the relevant environment surface into a reusable task world so agents can train, evaluate, and regress against the same tool/API behavior."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "What is a replay-backed API/MCP snapshot?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "A replay-backed API/MCP snapshot is a deterministic fixture world built from frozen tool catalogs, exact requests, exact observations, task specs, verifier metadata, checksums, and replay miss rules."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "When should a team use a live domain MCP environment?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Use a live domain MCP environment when the agent must do real domain work in a Datalox-owned workspace, such as flow cytometry, molecule annotation, or protein visualization."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Can a team create a private fixture?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes. A team can run an approved agent rollout through the recording path once, pack the observed tool/API behavior into a replay bundle, and keep the resulting fixture private."
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -59,7 +135,7 @@
                     </div>
                     <h1 class="hero-title">Versioned agent task environments.</h1>
                     <p class="hero-description">
-                        Datalox provides live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible agent training, eval, and regression.
+                        Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work. Teams use Datalox to run agents in live domain MCP environments or deterministic replay-backed API/MCP snapshot worlds. Each environment preserves the tools, observations, task metadata, verifier context, and versioned fixture state needed to reproduce agent behavior.
                     </p>
                     <div class="hero-highlights">
                         <div class="highlight-pill"><i class="fas fa-cubes"></i> Published fixture worlds</div>
@@ -129,18 +205,50 @@
             </div>
         </section>
 
+        <section id="answer" class="direct-answer">
+            <div class="container">
+                <div class="section-header answer-header">
+                    <span class="section-kicker">Direct Answer</span>
+                    <h2>What is Datalox?</h2>
+                    <p>Datalox is a platform for giving AI agents stable, versioned task worlds they can run against for training, eval, regression, and rollout evidence.</p>
+                </div>
+                <div class="answer-grid">
+                    <div class="answer-card reveal">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Datalox</h3>
+                        <p>Datalox provides versioned agent task environments for teams building tool-using AI agents.</p>
+                    </div>
+                    <div class="answer-card reveal">
+                        <i class="fas fa-cubes"></i>
+                        <h3>Versioned environment</h3>
+                        <p>A pinned world that defines the agent's tools, task context, expected observations, and verifier metadata.</p>
+                    </div>
+                    <div class="answer-card reveal">
+                        <i class="fas fa-box-archive"></i>
+                        <h3>Replay world contents</h3>
+                        <p>Tool catalogs, exact requests, exact observations, task specs, checksums, provenance, and replay miss rules.</p>
+                    </div>
+                    <div class="answer-card reveal">
+                        <i class="fas fa-code-branch"></i>
+                        <h3>Who uses it</h3>
+                        <p>Agent teams that need reproducible training data, eval worlds, regression suites, and private fixture authoring.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="environments" class="how-it-works">
             <div class="container">
                 <div class="section-header">
                     <span class="section-kicker">Environment Types</span>
                     <h2>Two ways to give agents a stable world.</h2>
-                    <p>Datalox separates live domain environments from replay-backed snapshots so teams can choose the right boundary for training, eval, and regression.</p>
+                    <p>Datalox separates real domain workspaces from deterministic snapshot worlds so teams can choose the right boundary for training, eval, and regression.</p>
                 </div>
                 <div class="how-grid">
                     <div class="how-card live-env reveal">
                         <div class="card-icon active"><i class="fas fa-flask-vial"></i></div>
                         <h3>Live domain MCP environments</h3>
-                        <p>Constrained Datalox-owned workspaces where agents do real domain work through MCP tools.</p>
+                        <p>Real Datalox-owned workspaces where agents do domain work through constrained MCP tools.</p>
                         <ul class="how-list">
                             <li>Flow cytometry, molecule biology, and protein visualization workspaces.</li>
                             <li>Domain files, parsers, validation, revisions, and compact UIs stay in the live env repo.</li>
@@ -150,7 +258,7 @@
                     <div class="how-card snapshot-env reveal">
                         <div class="card-icon active-green"><i class="fas fa-box-archive"></i></div>
                         <h3>Replay-backed API/MCP snapshots</h3>
-                        <p>Frozen fixture worlds that replay observed tool catalogs, requests, observations, tasks, and verifier metadata.</p>
+                        <p>Deterministic fixture worlds built from frozen tool catalogs, requests, observations, tasks, and verifier metadata.</p>
                         <ul class="how-list">
                             <li>Install a pinned fixture or fixture set by version.</li>
                             <li>Serve recorded observations with live upstream off.</li>
@@ -209,7 +317,7 @@
                                 <div class="point-number">T</div>
                                 <div class="point-content">
                                     <h4>Tools and observations</h4>
-                                    <p>Frozen MCP tool catalogs, exact requests, exact observations, request hashes, and sequence indexes.</p>
+                                    <p>Frozen MCP tool catalogs, exact tool requests, exact observations, request hashes, and sequence indexes.</p>
                                 </div>
                             </div>
                             <div class="vision-point reveal">
@@ -223,7 +331,7 @@
                                 <div class="point-number">V</div>
                                 <div class="point-content">
                                     <h4>Versioning and trust</h4>
-                                    <p>Replay bundles, checksums, export gates, train/dev/test splits, and optional SFT or eval derivatives.</p>
+                                    <p>Replay bundles, checksums, provenance, export gates, train/dev/test splits, explicit replay misses, and optional SFT or eval derivatives.</p>
                                 </div>
                             </div>
                         </div>
@@ -238,12 +346,14 @@
                             <span>fixture-world.manifest</span>
                         </div>
                         <div class="manifest-list">
-                            <div><strong>tools</strong><span>github, shell, repo files</span></div>
-                            <div><strong>observations</strong><span>recorded tool results</span></div>
+                            <div><strong>tools</strong><span>tool catalogs and MCP surfaces</span></div>
+                            <div><strong>requests</strong><span>exact tool calls and sequence indexes</span></div>
+                            <div><strong>observations</strong><span>recorded tool results and response bodies</span></div>
                             <div><strong>tasks</strong><span>review PR, inspect CI, cite risks</span></div>
                             <div><strong>verifiers</strong><span>evidence and rubric metadata</span></div>
-                            <div><strong>trust</strong><span>checksums, export gate, provenance</span></div>
+                            <div><strong>trust</strong><span>checksums, provenance, export gate</span></div>
                             <div><strong>splits</strong><span>train, dev, test task membership</span></div>
+                            <div><strong>misses</strong><span>explicit replay miss rules</span></div>
                         </div>
                     </div>
                 </div>
@@ -278,7 +388,7 @@
                 <div class="section-header">
                     <span class="section-kicker">How It Works</span>
                     <h2>Install a world, replay it, or author a private snapshot.</h2>
-                    <p>The core flow is consumption first. Recording exists to create new private snapshots from live environments.</p>
+                    <p>Recording is an authoring path, not the product surface: users consume versioned worlds, run live domain environments, or create private fixtures from approved rollouts.</p>
                 </div>
                 <div class="flow-grid">
                     <div class="cli-card reveal">
@@ -308,6 +418,38 @@ datalox replay --bundle .datalox/replay-bundles/private-task-world</code></pre>
                     <span>replay bundle</span>
                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     <span>fixture pack/version</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">FAQ</span>
+                    <h2>Definitions for agent task environments.</h2>
+                    <p>These answers are intentionally direct so teams and AI systems can classify Datalox without guessing from logs or observability language.</p>
+                </div>
+                <div class="faq-list">
+                    <article class="faq-item reveal">
+                        <h3>What is a versioned agent task environment?</h3>
+                        <p>A versioned agent task environment is a pinned world an AI agent can act in repeatedly. It defines the available tools, task context, observations, verifier metadata, and versioned fixture state needed to reproduce or evaluate agent behavior.</p>
+                    </article>
+                    <article class="faq-item reveal">
+                        <h3>How is Datalox different from agent logging or observability?</h3>
+                        <p>Agent logging records what happened in one run. Datalox turns the relevant environment surface into a reusable task world so agents can train, evaluate, and regress against the same tool/API behavior.</p>
+                    </article>
+                    <article class="faq-item reveal">
+                        <h3>What is a replay-backed API/MCP snapshot?</h3>
+                        <p>A replay-backed API/MCP snapshot is a deterministic fixture world built from frozen tool catalogs, exact requests, exact observations, task specs, verifier metadata, checksums, and replay miss rules.</p>
+                    </article>
+                    <article class="faq-item reveal">
+                        <h3>When should a team use a live domain MCP environment?</h3>
+                        <p>Use a live domain MCP environment when the agent must do real domain work in a Datalox-owned workspace, such as flow cytometry, molecule annotation, or protein visualization.</p>
+                    </article>
+                    <article class="faq-item reveal">
+                        <h3>Can a team create a private fixture?</h3>
+                        <p>Yes. A team can run an approved agent rollout through the recording path once, pack the observed tool/API behavior into a replay bundle, and keep the resulting fixture private.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -409,6 +551,7 @@ datalox replay --bundle .datalox/replay-bundles/private-task-world</code></pre>
                         <a href="#environments">Environments</a>
                         <a href="#fixtures">Fixtures</a>
                         <a href="#how-it-works">How It Works</a>
+                        <a href="#faq">FAQ</a>
                     </div>
                     <div class="footer-section">
                         <h4>Contact</h4>
