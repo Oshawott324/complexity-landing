@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datalox — Portable Scientific Runtime for AI Agents</title>
+    <title>Datalox - Versioned Agent Task Environments</title>
+    <meta name="description" content="Datalox provides versioned agent task environments: live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible training, eval, and regression.">
+    <meta property="og:title" content="Datalox - Versioned Agent Task Environments">
+    <meta property="og:description" content="Live domain MCP environments and replay-backed API/MCP snapshots for reproducible agent training, eval, and regression worlds.">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -32,10 +36,9 @@
                 <span>Datalox</span>
             </div>
             <div class="nav-menu">
-                <a href="#vision" class="nav-link">Vision</a>
-                <a href="#how-it-works" class="nav-link">Principles</a>
-                <a href="#architecture" class="nav-link">Architecture</a>
-                <a href="#platform" class="nav-link">Runtime API</a>
+                <a href="#environments" class="nav-link">Environments</a>
+                <a href="#fixtures" class="nav-link">Fixtures</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <a href="mailto:contact@complexity-ai.com" class="contribution-btn">
                     <i class="fas fa-paper-plane"></i>
@@ -49,46 +52,75 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <span>Portable Scientific Runtime for AI Agents</span>
+                    <i class="fas fa-layer-group"></i>
+                    <span>Versioned task worlds for tool-using agents</span>
                 </div>
-                <h1 class="hero-title">
-                    Scientific infrastructure any agent can use to compute, interpret, and reason over experiments.
-                </h1>
+                <h1 class="hero-title">Versioned agent task environments.</h1>
                 <p class="hero-description">
-                    Datalox is not an "AI cytometry assistant" and not an "agent framework." It is a programmable execution and data layer for biological experiments. Agents become clients of the runtime.
+                    Datalox provides live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible agent training, eval, and regression.
                 </p>
                 <div class="hero-highlights">
-                    <div class="highlight-pill"><i class="fas fa-microchip"></i> Deterministic scientific compute</div>
-                    <div class="highlight-pill"><i class="fas fa-database"></i> Structured experiment state</div>
-                    <div class="highlight-pill"><i class="fas fa-brain"></i> Agent-side reasoning</div>
+                    <div class="highlight-pill"><i class="fas fa-cubes"></i> Published fixture worlds</div>
+                    <div class="highlight-pill"><i class="fas fa-flask-vial"></i> Live domain MCP envs</div>
+                    <div class="highlight-pill"><i class="fas fa-lock"></i> Private versioned snapshots</div>
                 </div>
                 <div class="hero-buttons">
-                    <a href="#architecture" class="btn btn-primary">
-                        <i class="fas fa-layer-group"></i>
-                        View Architecture
+                    <a href="#environments" class="btn btn-primary">
+                        <i class="fas fa-compass"></i>
+                        Explore Environments
                     </a>
-                    <a href="#platform" class="btn btn-secondary">
-                        <i class="fas fa-plug"></i>
-                        Explore API Layer
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-box-open"></i>
+                        Bring a Task World
                     </a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="floating-card card-1">
-                    <i class="fas fa-gears"></i>
-                    <span>Execution Runtime</span>
-                </div>
-                <div class="floating-card card-2">
-                    <i class="fas fa-sitemap"></i>
-                    <span>Experiment State</span>
-                </div>
-                <div class="floating-card card-3">
-                    <i class="fas fa-wave-square"></i>
-                    <span>Signal Compiler</span>
-                </div>
-                <div class="floating-card card-4">
-                    <i class="fas fa-robot"></i>
-                    <span>Any Agent</span>
+            <div class="hero-visual" aria-label="Versioned world anatomy">
+                <div class="world-panel">
+                    <div class="panel-toolbar">
+                        <div class="panel-dots" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span>github-pr-review@2026-05.0</span>
+                    </div>
+                    <div class="world-map">
+                        <div class="world-core">
+                            <span class="step-label">versioned world</span>
+                            <strong>coding-review-ci-basic</strong>
+                            <code>fixture set + replay runtime</code>
+                        </div>
+                        <div class="world-node tools">
+                            <i class="fas fa-screwdriver-wrench"></i>
+                            <span>Tool catalog</span>
+                        </div>
+                        <div class="world-node observations">
+                            <i class="fas fa-database"></i>
+                            <span>Observations</span>
+                        </div>
+                        <div class="world-node tasks">
+                            <i class="fas fa-list-check"></i>
+                            <span>Task specs</span>
+                        </div>
+                        <div class="world-node verifiers">
+                            <i class="fas fa-scale-balanced"></i>
+                            <span>Verifier metadata</span>
+                        </div>
+                        <div class="world-node trust">
+                            <i class="fas fa-shield-halved"></i>
+                            <span>Checksums</span>
+                        </div>
+                        <div class="world-node exports">
+                            <i class="fas fa-code-branch"></i>
+                            <span>SFT/eval exports</span>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span><i class="fas fa-plug-circle-check"></i> Live upstream off</span>
+                        <span><i class="fas fa-fingerprint"></i> Request hash</span>
+                        <span><i class="fas fa-circle-exclamation"></i> Explicit misses</span>
+                    </div>
                 </div>
             </div>
         </div>
