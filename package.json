@@ -1,10 +1,10 @@
 {
   "name": "complexity-landing",
   "version": "1.0.0",
-  "description": "A modern, Notion-inspired landing page for Complexity AI - a startup focused on automating laboratory workflows through AI and data collection.",
+  "description": "Landing page for Datalox versioned agent task environments.",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --check script.js && node --check api/submit.js"
   },
   "repository": {
     "type": "git",
