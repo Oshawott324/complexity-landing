@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datalox - Versioned Agent Task Environments</title>
-    <meta name="description" content="Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work with live domain MCP environments and replay-backed API/MCP snapshot worlds.">
-    <meta property="og:title" content="Datalox - Versioned Agent Task Environments">
-    <meta property="og:description" content="Live domain MCP environments and replay-backed API/MCP snapshots for reproducible agent training, eval, and regression worlds.">
+    <title>Datalox - Replayable API Environments for Agents</title>
+    <meta name="description" content="Datalox provides gated provider API building blocks and replayable API worlds for training, evaluating, and auditing tool-using agents.">
+    <meta property="og:title" content="Datalox - Replayable API Environments for Agents">
+    <meta property="og:description" content="Gated provider API building blocks and replayable API worlds for reproducible agent training, eval, and audit evidence.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.complexity-ai.com/">
     <link rel="canonical" href="https://www.complexity-ai.com/">
@@ -36,7 +36,7 @@
                     "provider": {
                         "@id": "https://www.complexity-ai.com/#organization"
                     },
-                    "description": "Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work through live domain MCP environments and replay-backed API/MCP snapshot worlds."
+                    "description": "Datalox provides gated provider API building blocks and replayable API worlds for training, evaluating, and auditing tool-using agents."
                 },
                 {
                     "@type": "FAQPage",
@@ -129,10 +129,10 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="nav-menu">
+                <a href="#workflows" class="nav-link">Tasks</a>
+                <a href="#tracks" class="nav-link">Tracks</a>
                 <a href="#environments" class="nav-link">Environments</a>
-                <a href="#fixtures" class="nav-link">Fixtures</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#contact" class="nav-link">Contact</a>
                 <a href="mailto:contact@complexity-ai.com" class="contribution-btn">
                     <i class="fas fa-paper-plane"></i>
                     Request Demo
@@ -147,21 +147,21 @@
                 <div class="hero-content">
                     <div class="hero-badge">
                         <i class="fas fa-layer-group"></i>
-                        <span>Versioned task worlds for tool-using agents</span>
+                        <span>Provider API building blocks and replayable worlds</span>
                     </div>
-                    <h1 class="hero-title">Versioned agent task environments.</h1>
+                    <h1 class="hero-title">Replayable API environments for tool-using agents.</h1>
                     <p class="hero-description">
-                        Datalox provides versioned agent task environments for training, evaluating, and replaying AI agent work. Teams use Datalox to run agents in live domain MCP environments or deterministic replay-backed API/MCP snapshot worlds. Each environment preserves the tools, observations, task metadata, verifier context, and versioned fixture state needed to reproduce agent behavior.
+                        Datalox puts a gated runtime in the agent call path. It replays provider-shaped reads, shadows safe writes, denies risky calls, records evidence, and exposes concrete API building blocks from providers such as GitHub, Datadog, Shopify, Slack, Stripe, OpenFDA, and RCSB PDB.
                     </p>
                     <div class="hero-highlights">
-                        <div class="highlight-pill"><i class="fas fa-cubes"></i> Published fixture worlds</div>
+                        <div class="highlight-pill"><i class="fas fa-cubes"></i> Provider API building blocks</div>
                         <div class="highlight-pill"><i class="fas fa-flask-vial"></i> Live domain MCP envs</div>
                         <div class="highlight-pill"><i class="fas fa-lock"></i> Private versioned snapshots</div>
                     </div>
                     <div class="hero-buttons">
-                        <a href="#environments" class="btn btn-primary">
-                            <i class="fas fa-compass"></i>
-                            Explore Environments
+                        <a href="#workflows" class="btn btn-primary">
+                            <i class="fas fa-circle-play"></i>
+                            Watch Workflows
                         </a>
                         <a href="#contact" class="btn btn-secondary">
                             <i class="fas fa-box-open"></i>
@@ -218,6 +218,141 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section id="workflows" class="workflow-showcase">
+            <div class="container">
+                <div class="section-header workflow-showcase-header">
+                    <span class="section-kicker">Recorded Dry-Run Programs</span>
+                    <h2>Three scientific workflows across distinct instruments.</h2>
+                    <p>Each recording shows the operation sequence, changing instrument state, generated evidence, and final decision. The examples use PyLabRobot-shaped interfaces and declared benchmark dynamics; no live hardware is controlled.</p>
+                </div>
+
+                <div class="workflow-table reveal" aria-label="Recorded scientific workflow examples">
+                    <div class="workflow-table-head" aria-hidden="true">
+                        <span>Workflow</span>
+                        <span>Recorded example</span>
+                        <span>Horizon</span>
+                        <span>Evaluation steps</span>
+                        <span>Dimension</span>
+                    </div>
+
+                    <article class="workflow-row">
+                        <div class="workflow-summary">
+                            <span class="workflow-family">Thermal control + qPCR</span>
+                            <h3>Thermocycler amplification QC</h3>
+                            <p>Complete the thermal program, verify the positive and no-template controls, and cite the finished amplification artifact.</p>
+                        </div>
+                        <div class="workflow-recording">
+                            <video controls preload="none" playsinline poster="assets/showcase/thermocycler-qpcr-cover.png" aria-label="Thermocycler qPCR dry-run recording">
+                                <source src="assets/showcase/thermocycler-qpcr.mp4" type="video/mp4">
+                                <a href="assets/showcase/thermocycler-qpcr.mp4">Open the thermocycler recording</a>
+                            </video>
+                            <p class="workflow-recording-meta">13 recorded steps <span aria-hidden="true">&middot;</span> 14.3 seconds <span aria-hidden="true">&middot;</span> dry run</p>
+                        </div>
+                        <div class="workflow-horizon">42 stage-cycles<br>82 thermal steps</div>
+                        <div class="workflow-evaluation">
+                            <ol>
+                                <li>Close and heat the lid</li>
+                                <li>Complete every thermal stage</li>
+                                <li>Interpret fresh control-linked curves</li>
+                            </ol>
+                        </div>
+                        <div class="workflow-dimension">Temporal and evidence reasoning</div>
+                    </article>
+
+                    <article class="workflow-row">
+                        <div class="workflow-summary">
+                            <span class="workflow-family">Incubation + repeated measurement</span>
+                            <h3>Eight-hour growth campaign</h3>
+                            <p>Maintain plate custody at 30 C and 250 RPM, collect OD600 on schedule, and decide from the complete time series.</p>
+                        </div>
+                        <div class="workflow-recording">
+                            <video controls preload="none" playsinline poster="assets/showcase/incubator-growth-cover.png" aria-label="Incubator-shaker growth campaign recording">
+                                <source src="assets/showcase/incubator-growth.mp4" type="video/mp4">
+                                <a href="assets/showcase/incubator-growth.mp4">Open the incubator-shaker recording</a>
+                            </video>
+                            <p class="workflow-recording-meta">21 recorded steps <span aria-hidden="true">&middot;</span> 23.2 seconds <span aria-hidden="true">&middot;</span> dry run</p>
+                        </div>
+                        <div class="workflow-horizon">8 logical hours<br>5 measurements</div>
+                        <div class="workflow-evaluation">
+                            <ol>
+                                <li>Track custody across eight slots</li>
+                                <li>Accumulate conditioned exposure</li>
+                                <li>Use the complete OD600 series</li>
+                            </ol>
+                        </div>
+                        <div class="workflow-dimension">Long-horizon state and cadence reasoning</div>
+                    </article>
+
+                    <article class="workflow-row">
+                        <div class="workflow-summary">
+                            <span class="workflow-family">Powder dosing + gravimetry</span>
+                            <h3>Feedback-controlled formulation</h3>
+                            <p>Tare the vial, make a coarse dose, calculate a correction from measured mass, and stop inside tolerance.</p>
+                        </div>
+                        <div class="workflow-recording">
+                            <video controls preload="none" playsinline poster="assets/showcase/powder-formulation-cover.png" aria-label="Powder formulation dry-run recording">
+                                <source src="assets/showcase/powder-formulation.mp4" type="video/mp4">
+                                <a href="assets/showcase/powder-formulation.mp4">Open the powder formulation recording</a>
+                            </video>
+                            <p class="workflow-recording-meta">10 recorded steps <span aria-hidden="true">&middot;</span> 9.8 seconds <span aria-hidden="true">&middot;</span> dry run</p>
+                        </div>
+                        <div class="workflow-horizon">2 doses<br>2 balance readings</div>
+                        <div class="workflow-evaluation">
+                            <ol>
+                                <li>Preserve vial identity</li>
+                                <li>Correct from measured mass</li>
+                                <li>Confirm the tolerance band</li>
+                            </ol>
+                        </div>
+                        <div class="workflow-dimension">Feedback and tolerance reasoning</div>
+                    </article>
+                </div>
+
+                <p class="workflow-boundary"><strong>Grounding boundary:</strong> instrument calls follow PyLabRobot interfaces. Fluorescence, growth, measurement noise, accelerated time, and powder-delivery error are declared benchmark projections rather than hardware-fidelity claims.</p>
+            </div>
+        </section>
+        <section id="tracks" class="evaluation-catalog">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">Evaluation Tracks</span>
+                    <h2>Measure the capability behind each instrument run.</h2>
+                    <p>The recordings are reproducible task programs, not standalone animations. Each one exposes a different failure surface and produces concrete state and evidence for evaluating an agent run.</p>
+                </div>
+                <div class="track-table reveal" aria-label="Current Datalox scientific evaluation tracks">
+                    <div class="track-table-head" aria-hidden="true">
+                        <span>Capability</span>
+                        <span>What the agent must do</span>
+                        <span>Current program</span>
+                        <span>Run evidence</span>
+                    </div>
+                    <article class="track-row">
+                        <div class="track-name"><span>01</span><h3>Instrument sequencing</h3></div>
+                        <p class="track-requirement">Satisfy device preconditions and execute ordered stages without skipping required transitions.</p>
+                        <a class="track-program" href="#workflows">Thermocycler amplification QC</a>
+                        <p class="track-evidence">Lid state, temperature stages, cycle count, amplification artifact</p>
+                    </article>
+                    <article class="track-row">
+                        <div class="track-name"><span>02</span><h3>Long-horizon coordination</h3></div>
+                        <p class="track-requirement">Preserve sample custody, maintain conditions, wait, and measure on the required cadence.</p>
+                        <a class="track-program" href="#workflows">Eight-hour growth campaign</a>
+                        <p class="track-evidence">Slot custody, conditioned exposure, logical time, OD600 series</p>
+                    </article>
+                    <article class="track-row">
+                        <div class="track-name"><span>03</span><h3>Closed-loop correction</h3></div>
+                        <p class="track-requirement">Use a measurement to choose the next action and stop when the target tolerance is reached.</p>
+                        <a class="track-program" href="#workflows">Feedback-controlled formulation</a>
+                        <p class="track-evidence">Dose pulses, balance readings, correction amount, final tolerance</p>
+                    </article>
+                    <article class="track-row">
+                        <div class="track-name"><span>04</span><h3>Evidence integrity</h3></div>
+                        <p class="track-requirement">Base the final decision on complete, fresh, control-linked evidence from the current run.</p>
+                        <span class="track-program track-programs">Shared across all three programs</span>
+                        <p class="track-evidence">Artifact identity, timestamps, controls, completeness, final decision</p>
+                    </article>
+                </div>
+                <p class="track-note">Model results will be added only after the same task versions have been run under the same tool and time limits.</p>
             </div>
         </section>
 
@@ -376,28 +511,54 @@
             </div>
         </section>
 
-        <section id="fixtures" class="architecture">
+        <section id="fixtures" class="provider-coverage">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-kicker">Fixture And Source Coverage</span>
-                    <h2>Published worlds and source surfaces.</h2>
-                    <p>Start from curated fixture families, Datalox-owned domain environments, or your own MCP/API surface.</p>
+                <div class="coverage-intro">
+                    <div class="section-header">
+                        <span class="section-kicker">Grounding Coverage</span>
+                        <h2>API evidence used to construct task worlds.</h2>
+                        <p>Datalox combines documented provider maps, locally probed services, and captured response cases. Coverage is labeled by evidence level; an executable replay is not presented as proof of unobserved provider behavior.</p>
+                    </div>
+                    <div class="coverage-stats reveal" aria-label="Checked Datalox runtime inventory totals">
+                        <div><strong>50</strong><span>executable environment assets</span></div>
+                        <div><strong>24</strong><span>probed or captured replay assets</span></div>
+                        <div><strong>20</strong><span>admitted stateful worlds</span></div>
+                    </div>
                 </div>
-                <div class="source-grid reveal" aria-label="Example Datalox worlds and source surfaces">
-                    <div class="source-cell source-github"><i class="fab fa-github"></i><span>GitHub PR review</span></div>
-                    <div class="source-cell source-github-ci"><i class="fas fa-code-branch"></i><span>GitHub CI failure</span></div>
-                    <div class="source-cell source-slack"><i class="fab fa-slack"></i><span>Slack support thread</span></div>
-                    <div class="source-cell source-stripe"><i class="fab fa-stripe"></i><span>Stripe billing edge cases</span></div>
-                    <div class="source-cell source-search"><i class="fas fa-magnifying-glass"></i><span>Search policy corpus</span></div>
-                    <div class="source-cell source-calendar"><i class="fas fa-calendar-days"></i><span>AppWorld calendar</span></div>
-                    <div class="source-cell source-flowcyto"><i class="fas fa-chart-simple"></i><span>Flow cytometry</span></div>
-                    <div class="source-cell source-molecule"><i class="fas fa-dna"></i><span>Molecule sequence annotation</span></div>
-                    <div class="source-cell source-protein"><i class="fas fa-atom"></i><span>Protein viewer snapshot</span></div>
-                    <div class="source-cell source-mcp"><i class="fas fa-plug"></i><span>Custom MCP</span></div>
+
+                <div class="provider-strip reveal" aria-label="Representative provider evidence">
+                    <article class="provider-item">
+                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=opentrons.com&amp;sz=64" alt="" loading="lazy"></span>
+                        <div><h3>Opentrons</h3><p>open-reference capture <span>66 cases</span></p></div>
+                    </article>
+                    <article class="provider-item">
+                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=rcsb.org&amp;sz=64" alt="" loading="lazy"></span>
+                        <div><h3>RCSB PDB</h3><p>captured <span>28 cases</span></p></div>
+                    </article>
+                    <article class="provider-item">
+                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=open.fda.gov&amp;sz=64" alt="" loading="lazy"></span>
+                        <div><h3>OpenFDA</h3><p>captured <span>22 cases</span></p></div>
+                    </article>
+                    <article class="provider-item">
+                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"></span>
+                        <div><h3>GitHub REST</h3><p>documented map <span>27 cases</span></p></div>
+                    </article>
+                    <article class="provider-item">
+                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=datadoghq.com&amp;sz=64" alt="" loading="lazy"></span>
+                        <div><h3>Datadog</h3><p>documented map <span>21 cases</span></p></div>
+                    </article>
+                    <article class="provider-item">
+                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=cromwell.readthedocs.io&amp;sz=64" alt="" loading="lazy"></span>
+                        <div><h3>Cromwell</h3><p>locally probed <span>14 cases</span></p></div>
+                    </article>
                 </div>
-                <p class="source-note">Examples show fixture families and source surfaces, not a generic integration marketplace.</p>
+                <div class="coverage-footer">
+                    <p>Inventory checked from the generated runtime report dated 2026-08-05. Counts describe executable evidence, not equal provider depth or production fidelity.</p>
+                    <a href="#contact">Bring a source surface <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
             </div>
         </section>
+
 
         <section id="how-it-works" class="developer-flow">
             <div class="container">
@@ -414,8 +575,8 @@ datalox replay --fixture github-pr-review-basic@2026-05.0</code></pre>
                     </div>
                     <div class="cli-card reveal">
                         <h3>Use a fixture set</h3>
-                        <pre><code>datalox fixture-sets install support-triage-basic@2026-05.0
-datalox replay --fixture-set support-triage-basic@2026-05.0</code></pre>
+                        <pre><code>datalox env install documented_shopify_admin_v0
+datalox gate serve --env documented_shopify_admin_v0</code></pre>
                     </div>
                     <div class="cli-card reveal">
                         <h3>Create a private fixture</h3>
@@ -572,8 +733,10 @@ datalox replay --bundle .datalox/replay-bundles/private-task-world</code></pre>
                 <div class="footer-links">
                     <div class="footer-section">
                         <h4>Product</h4>
+                        <a href="#workflows">Task Catalog</a>
+                        <a href="#tracks">Evaluation Tracks</a>
                         <a href="#environments">Environments</a>
-                        <a href="#fixtures">Fixtures</a>
+                        <a href="#fixtures">Grounding Coverage</a>
                         <a href="#how-it-works">How It Works</a>
                         <a href="#faq">FAQ</a>
                     </div>
