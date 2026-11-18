@@ -1,758 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datalox - Replayable API Environments for Agents</title>
-    <meta name="description" content="Datalox provides gated provider API building blocks and replayable API worlds for training, evaluating, and auditing tool-using agents.">
-    <meta property="og:title" content="Datalox - Replayable API Environments for Agents">
-    <meta property="og:description" content="Gated provider API building blocks and replayable API worlds for reproducible agent training, eval, and audit evidence.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.complexity-ai.com/">
-    <link rel="canonical" href="https://www.complexity-ai.com/">
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="Datalox agent-readable summary">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "Organization",
-                    "@id": "https://www.complexity-ai.com/#organization",
-                    "name": "Complexity LLC",
-                    "url": "https://www.complexity-ai.com/",
-                    "email": "contact@complexity-ai.com",
-                    "foundingDate": "2025"
-                },
-                {
-                    "@type": "SoftwareApplication",
-                    "@id": "https://www.complexity-ai.com/#datalox",
-                    "name": "Datalox",
-                    "applicationCategory": "DeveloperApplication",
-                    "operatingSystem": "CLI and MCP-compatible agent environments",
-                    "url": "https://www.complexity-ai.com/",
-                    "provider": {
-                        "@id": "https://www.complexity-ai.com/#organization"
-                    },
-                    "description": "Datalox provides gated provider API building blocks and replayable API worlds for training, evaluating, and auditing tool-using agents."
-                },
-                {
-                    "@type": "FAQPage",
-                    "@id": "https://www.complexity-ai.com/#faq",
-                    "mainEntity": [
-                        {
-                            "@type": "Question",
-                            "name": "What is a versioned agent task environment?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "A versioned agent task environment is a pinned world an AI agent can act in repeatedly. It defines the available tools, task context, observations, verifier metadata, and versioned fixture state needed to reproduce or evaluate agent behavior."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "How is Datalox different from agent logging or observability?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Agent logging records what happened in one run. Datalox turns the relevant environment surface into a reusable task world so agents can train, evaluate, and regress against the same tool/API behavior."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "What is a replay-backed API/MCP snapshot?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "A replay-backed API/MCP snapshot is a deterministic fixture world built from frozen tool catalogs, exact requests, exact observations, task specs, verifier metadata, checksums, and replay miss rules."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "When should a team use a live domain MCP environment?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Use a live domain MCP environment when the agent must do real domain work in a Datalox-owned workspace, such as flow cytometry, molecule annotation, or protein visualization."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "Can a team create a private fixture?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Yes. A team can run an approved agent rollout through the recording path once, pack the observed tool/API behavior into a replay bundle, and keep the resulting fixture private."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "What does \"versioned\" mean in Datalox?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "In Datalox, versioned means the task world is pinned to a named fixture or fixture set with stable tool catalogs, observations, task metadata, verifier metadata, checksums, provenance, and split membership."
-                            }
-                        },
-                        {
-                            "@type": "Question",
-                            "name": "How do teams verify that a replay world matches the original environment?",
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": "Teams verify replay faithfulness by checking request hashes, sequence indexes, recorded observations, checksums, provenance, verifier metadata, and explicit replay misses against the original approved rollout."
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#252523">
+<meta name="color-scheme" content="dark">
+<title>Complexity AI | RL Environments Graded by Real Experiments</title>
+<meta name="description" content="We train AI scientists on real lab work. RL environments graded by real experiments, not opinions, for frontier labs and RL environment vendors.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Complexity AI | RL Environments Graded by Real Experiments">
+<meta property="og:description" content="We train AI scientists on real lab work. RL environments graded by real experiments, not opinions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.complexity-ai.com/">
+<link rel="canonical" href="https://www.complexity-ai.com/">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="Complexity AI summary">
+<link rel="icon" href="assets/complexity-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Complexity AI","legalName":"Complexity LLC","url":"https://www.complexity-ai.com/","email":"contact@complexity-ai.com","description":"RL environments for training AI scientists on real lab work, graded by real experiments. Built for frontier AI labs and RL environment vendors."}
+</script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#top" class="nav-logo" aria-label="Datalox home">
-                <svg
-                    class="datalox-mark-icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                >
-                    <path d="M5 4v16"></path>
-                    <path d="M5 4c9.5 0 14 2.8 14 8s-4.5 8-14 8"></path>
-                    <path d="M18 9h3"></path>
-                    <path d="M18 15h3"></path>
-                </svg>
-                <span>Datalox</span>
-            </a>
-            <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-menu">
-                <a href="#workflows" class="nav-link">Tasks</a>
-                <a href="#tracks" class="nav-link">Tracks</a>
-                <a href="#environments" class="nav-link">Environments</a>
-                <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="mailto:contact@complexity-ai.com" class="contribution-btn">
-                    <i class="fas fa-paper-plane"></i>
-                    Request Demo
-                </a>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-circle-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></symbol>
+<symbol id="i-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></symbol>
+<symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-file-x" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m14.5 12.5-5 5"/><path d="m9.5 12.5 5 5"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+<symbol id="i-quote" viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></symbol>
+<symbol id="i-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+<symbol id="i-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-skip-back" viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" x2="5" y1="19" y2="5"/></symbol>
+<symbol id="i-skip-forward" viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" x2="19" y1="5" y2="19"/></symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+</svg>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="navbar">
+    <div class="navbar-inner">
+        <a class="logo" href="#top" aria-label="Complexity AI home">
+            <svg class="brand-mark" viewBox="0 0 32 36" aria-hidden="true"><path d="M16 1 31 9v18l-15 8L1 27V9Zm0 4L6 10l10 5 10-5ZM5 14v11l9 5V19Zm13 5v11l9-5V14Z" fill="currentColor"/></svg>
+            <span>Complexity AI</span>
+        </a>
+        <nav class="nav-menu" id="navigation" aria-label="Main navigation">
+            <a href="#problem" class="nav-link">Problem</a>
+            <a href="#environments" class="nav-link">Environments</a>
+            <a href="#loop" class="nav-link">How it works</a>
+            <a href="#customers" class="nav-link">Customers</a>
+            <a href="#twin" class="nav-link">OT-2 twin</a>
+            <a href="#roadmap" class="nav-link">Roadmap</a>
+            <a href="#contact" class="nav-cta">Work with us</a>
+        </nav>
+        <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-controls="navigation" aria-expanded="false">
+            <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+            <svg class="icon icon-close" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+    </div>
+</header>
+
+<main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+            <p class="hero-status"><span class="live-dot" aria-hidden="true"></span>32 tasks in the library today, more each quarter</p>
+            <h1 id="hero-title">We train AI scientists on <em>real lab work.</em></h1>
+            <p class="hero-sub">RL environments graded by real experiments, not opinions.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="button button-primary">Work with us</a>
+                <a href="#loop" class="button button-ghost"><svg class="icon" aria-hidden="true"><use href="#i-refresh-cw"/></svg>See how it works</a>
             </div>
         </div>
-    </nav>
+        <figure class="card task-card" aria-labelledby="task-card-title">
+            <div class="card-head"><h2 id="task-card-title">Graded task</h2><span class="chip chip-neutral">Cytometry</span></div>
+            <p class="task-prompt">A real bone-marrow run where two stains failed. Find the cells.</p>
+            <dl class="task-results">
+                <div><dt>Answer key</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg>Independent evidence</dd></div>
+                <div class="pass"><dt>Wet-lab experts</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg>Found the cells</dd></div>
+                <div class="fail"><dt>Frontier model</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-circle-x"/></svg>Found under half, twice</dd></div>
+            </dl>
+            <figcaption><span>Complexity AI test, 2026</span><a href="#problem">Why this matters <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a></figcaption>
+        </figure>
+    </section>
 
-    <main id="top">
-        <section class="hero">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <i class="fas fa-layer-group"></i>
-                        <span>Provider API building blocks and replayable worlds</span>
-                    </div>
-                    <h1 class="hero-title">Replayable API environments for tool-using agents.</h1>
-                    <p class="hero-description">
-                        Datalox puts a gated runtime in the agent call path. It replays provider-shaped reads, shadows safe writes, denies risky calls, records evidence, and exposes concrete API building blocks from providers such as GitHub, Datadog, Shopify, Slack, Stripe, OpenFDA, and RCSB PDB.
-                    </p>
-                    <div class="hero-highlights">
-                        <div class="highlight-pill"><i class="fas fa-cubes"></i> Provider API building blocks</div>
-                        <div class="highlight-pill"><i class="fas fa-flask-vial"></i> Live domain MCP envs</div>
-                        <div class="highlight-pill"><i class="fas fa-lock"></i> Private versioned snapshots</div>
-                    </div>
-                    <div class="hero-buttons">
-                        <a href="#workflows" class="btn btn-primary">
-                            <i class="fas fa-circle-play"></i>
-                            Watch Workflows
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-box-open"></i>
-                            Bring a Task World
-                        </a>
-                    </div>
-                </div>
+    <section class="partners" aria-labelledby="partners-title">
+        <h2 class="partners-label" id="partners-title">Design partners</h2>
+        <ul class="partner-logos">
+            <li><span class="fleet-wordmark">fleet</span></li>
+            <li><span class="micro-wordmark">micro1.</span></li>
+        </ul>
+    </section>
 
-                <div class="hero-visual" aria-label="Versioned world anatomy">
-                    <div class="world-panel">
-                        <div class="panel-toolbar">
-                            <div class="panel-dots" aria-hidden="true">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <span>github-pr-review@2026-05.0</span>
-                        </div>
-                        <div class="world-map">
-                            <div class="world-core">
-                                <span class="step-label">versioned world</span>
-                                <strong>coding-review-ci-basic</strong>
-                                <code>fixture set + replay runtime</code>
-                            </div>
-                            <div class="world-node tools">
-                                <i class="fas fa-screwdriver-wrench"></i>
-                                <span>Tool catalog</span>
-                            </div>
-                            <div class="world-node observations">
-                                <i class="fas fa-database"></i>
-                                <span>Observations</span>
-                            </div>
-                            <div class="world-node tasks">
-                                <i class="fas fa-list-check"></i>
-                                <span>Task specs</span>
-                            </div>
-                            <div class="world-node verifiers">
-                                <i class="fas fa-scale-balanced"></i>
-                                <span>Verifier metadata</span>
-                            </div>
-                            <div class="world-node trust">
-                                <i class="fas fa-shield-halved"></i>
-                                <span>Checksums</span>
-                            </div>
-                            <div class="world-node exports">
-                                <i class="fas fa-code-branch"></i>
-                                <span>SFT/eval exports</span>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <span><i class="fas fa-plug-circle-check"></i> Live upstream off</span>
-                            <span><i class="fas fa-fingerprint"></i> Request hash</span>
-                            <span><i class="fas fa-circle-exclamation"></i> Explicit misses</span>
-                        </div>
-                    </div>
+    <section class="section" id="problem" aria-labelledby="problem-title">
+        <div class="section-label"><span>The problem</span><span>What we see in real runs</span></div>
+        <div class="section-head">
+            <h2 id="problem-title">AI knows biology. <em>It can&rsquo;t judge experiments.</em></h2>
+            <p>And AI labs can&rsquo;t train what they can&rsquo;t grade.</p>
+        </div>
+        <div class="problem-grid">
+            <article>
+                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-book-open"/></svg></span>
+                <h3>Knows, but can&rsquo;t do</h3>
+                <p>Beats human experts on protocol quizzes. A quiz isn&rsquo;t an experiment.</p>
+                <span class="source">Anthropic, Oct 2025</span>
+            </article>
+            <article>
+                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span>
+                <h3>When a stain fails, AI gets lost</h3>
+                <p>Two stains failed in a real bone-marrow run. Experts still found the cells. Opus 5.5 found under half, twice.</p>
+                <span class="source">Complexity AI test, 2026</span>
+            </article>
+            <article>
+                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></span>
+                <h3>Sees it, won&rsquo;t call it</h3>
+                <p>In our blind runs, models found a subtle real effect, then declined to call it.</p>
+                <span class="source">Complexity AI test, 2026</span>
+            </article>
+            <article>
+                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-file-x"/></svg></span>
+                <h3>The judgment isn&rsquo;t written down</h3>
+                <p>Papers report the result, not why an expert trusted a run or threw it out.</p>
+                <span class="source">Wet-lab experts we work with</span>
+            </article>
+        </div>
+        <div class="callout">
+            <span class="callout-label">Root cause</span>
+            <p>Models learn what they&rsquo;re graded on. <em>Nobody grades them on real experiments.</em></p>
+        </div>
+    </section>
+
+    <section class="section" id="environments" aria-labelledby="environments-title">
+        <div class="section-label"><span>What we build</span><span><span class="live-dot" aria-hidden="true"></span>Available now</span></div>
+        <div class="section-head">
+            <h2 id="environments-title">RL environments now. <em>A task engine that keeps them fresh.</em></h2>
+            <p>Real lab tasks for frontier labs and RL environment vendors, graded against what actually happened in the lab.</p>
+        </div>
+        <div class="solution-grid">
+            <article class="card">
+                <div class="card-head"><h3>RL environments</h3><span class="chip chip-green"><span class="live-dot" aria-hidden="true"></span>Now</span></div>
+                <dl class="spec-list">
+                    <div><dt>For</dt><dd>Frontier labs and RL environment vendors</dd></div>
+                    <div><dt>What</dt><dd>Real lab tasks, inside the software scientists use</dd></div>
+                    <div><dt>Data</dt><dd>Raw instrument files plus the lab&rsquo;s measured result</dd></div>
+                    <div><dt>Graders</dt><dd>Tested on real outcomes, backed by a library of real failures</dd></div>
+                </dl>
+                <ul class="tag-list" aria-label="Environment families">
+                    <li>Cytometry</li><li>Single-cell</li><li>Assays</li><li>Imaging</li><li class="tag-proto">OT-2 twin &middot; prototype</li>
+                </ul>
+            </article>
+            <article class="card">
+                <div class="card-head"><h3>Task engine</h3><span class="chip chip-amber">Next</span></div>
+                <dl class="spec-list">
+                    <div><dt>Discover</dt><dd>Failures seen in paid analysis jobs and expert sessions</dd></div>
+                    <div><dt>Rebuild</dt><dd>On public data, with a planted change where needed</dd></div>
+                    <div><dt>Key</dt><dd>Independent evidence, or known by design</dd></div>
+                    <div><dt>Top-up</dt><dd>Licenses or runs, only when a buyer orders</dd></div>
+                </dl>
+                <ul class="tag-list" aria-label="Task sources">
+                    <li>Expert sessions</li><li>Paid jobs</li><li>Failure library</li>
+                </ul>
+            </article>
+        </div>
+        <p class="loop-note"><svg class="icon" aria-hidden="true"><use href="#i-refresh-cw"/></svg>Failures pick the next task. Real work shows new failures.</p>
+    </section>
+
+    <section class="section" id="loop" aria-labelledby="loop-title">
+        <div class="section-label"><span>How the loop works</span><span>Six steps, every turn</span></div>
+        <div class="section-head">
+            <h2 id="loop-title">AI does the thinking. <em>Real experiments keep the score.</em></h2>
+            <p>Each turn adds real failures and harder tasks. Better models create demand for the next tier.</p>
+        </div>
+        <div class="loop-tabs" role="tablist" aria-label="Steps in the loop">
+            <button id="stage-0" class="loop-tab" type="button" role="tab" aria-selected="true" aria-controls="loop-panel" tabindex="0" data-stage="0"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>Discover</button>
+            <button id="stage-1" class="loop-tab" type="button" role="tab" aria-selected="false" aria-controls="loop-panel" tabindex="-1" data-stage="1"><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg>Rebuild</button>
+            <button id="stage-2" class="loop-tab" type="button" role="tab" aria-selected="false" aria-controls="loop-panel" tabindex="-1" data-stage="2"><svg class="icon" aria-hidden="true"><use href="#i-brain"/></svg>Training</button>
+            <button id="stage-3" class="loop-tab" type="button" role="tab" aria-selected="false" aria-controls="loop-panel" tabindex="-1" data-stage="3"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Grading</button>
+            <button id="stage-4" class="loop-tab" type="button" role="tab" aria-selected="false" aria-controls="loop-panel" tabindex="-1" data-stage="4"><svg class="icon" aria-hidden="true"><use href="#i-crosshair"/></svg>Next sessions</button>
+            <button id="stage-5" class="loop-tab" type="button" role="tab" aria-selected="false" aria-controls="loop-panel" tabindex="-1" data-stage="5"><svg class="icon" aria-hidden="true"><use href="#i-trending-up"/></svg>Harder tiers</button>
+        </div>
+        <div class="card loop-card">
+            <div class="loop-panel" id="loop-panel" role="tabpanel" tabindex="0" aria-labelledby="stage-0">
+                <div class="loop-meta"><span class="loop-step">Step <span data-loop-number>01</span> of 06</span><span class="chip chip-blue" data-loop-owner>Discover</span></div>
+                <h3 data-loop-title>Real failures found.</h3>
+                <p data-loop-description>We find where AI breaks on real lab work, in paid analysis jobs and expert sessions with AI.</p>
+                <div class="loop-instrument">
+                    <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-search" data-loop-icon/></svg></span>
+                    <span><strong data-loop-instrument>Paid jobs and expert sessions</strong><small>Where it happens</small></span>
                 </div>
             </div>
-        </section>
-        <section id="workflows" class="workflow-showcase">
-            <div class="container">
-                <div class="section-header workflow-showcase-header">
-                    <span class="section-kicker">Recorded Dry-Run Programs</span>
-                    <h2>Three scientific workflows across distinct instruments.</h2>
-                    <p>Each recording shows the operation sequence, changing instrument state, generated evidence, and final decision. The examples use PyLabRobot-shaped interfaces and declared benchmark dynamics; no live hardware is controlled.</p>
-                </div>
-
-                <div class="workflow-table reveal" aria-label="Recorded scientific workflow examples">
-                    <div class="workflow-table-head" aria-hidden="true">
-                        <span>Workflow</span>
-                        <span>Recorded example</span>
-                        <span>Horizon</span>
-                        <span>Evaluation steps</span>
-                        <span>Dimension</span>
-                    </div>
-
-                    <article class="workflow-row">
-                        <div class="workflow-summary">
-                            <span class="workflow-family">Thermal control + qPCR</span>
-                            <h3>Thermocycler amplification QC</h3>
-                            <p>Complete the thermal program, verify the positive and no-template controls, and cite the finished amplification artifact.</p>
-                        </div>
-                        <div class="workflow-recording">
-                            <video controls preload="none" playsinline poster="assets/showcase/thermocycler-qpcr-cover.png" aria-label="Thermocycler qPCR dry-run recording">
-                                <source src="assets/showcase/thermocycler-qpcr.mp4" type="video/mp4">
-                                <a href="assets/showcase/thermocycler-qpcr.mp4">Open the thermocycler recording</a>
-                            </video>
-                            <p class="workflow-recording-meta">13 recorded steps <span aria-hidden="true">&middot;</span> 14.3 seconds <span aria-hidden="true">&middot;</span> dry run</p>
-                        </div>
-                        <div class="workflow-horizon">42 stage-cycles<br>82 thermal steps</div>
-                        <div class="workflow-evaluation">
-                            <ol>
-                                <li>Close and heat the lid</li>
-                                <li>Complete every thermal stage</li>
-                                <li>Interpret fresh control-linked curves</li>
-                            </ol>
-                        </div>
-                        <div class="workflow-dimension">Temporal and evidence reasoning</div>
-                    </article>
-
-                    <article class="workflow-row">
-                        <div class="workflow-summary">
-                            <span class="workflow-family">Incubation + repeated measurement</span>
-                            <h3>Eight-hour growth campaign</h3>
-                            <p>Maintain plate custody at 30 C and 250 RPM, collect OD600 on schedule, and decide from the complete time series.</p>
-                        </div>
-                        <div class="workflow-recording">
-                            <video controls preload="none" playsinline poster="assets/showcase/incubator-growth-cover.png" aria-label="Incubator-shaker growth campaign recording">
-                                <source src="assets/showcase/incubator-growth.mp4" type="video/mp4">
-                                <a href="assets/showcase/incubator-growth.mp4">Open the incubator-shaker recording</a>
-                            </video>
-                            <p class="workflow-recording-meta">21 recorded steps <span aria-hidden="true">&middot;</span> 23.2 seconds <span aria-hidden="true">&middot;</span> dry run</p>
-                        </div>
-                        <div class="workflow-horizon">8 logical hours<br>5 measurements</div>
-                        <div class="workflow-evaluation">
-                            <ol>
-                                <li>Track custody across eight slots</li>
-                                <li>Accumulate conditioned exposure</li>
-                                <li>Use the complete OD600 series</li>
-                            </ol>
-                        </div>
-                        <div class="workflow-dimension">Long-horizon state and cadence reasoning</div>
-                    </article>
-
-                    <article class="workflow-row">
-                        <div class="workflow-summary">
-                            <span class="workflow-family">Powder dosing + gravimetry</span>
-                            <h3>Feedback-controlled formulation</h3>
-                            <p>Tare the vial, make a coarse dose, calculate a correction from measured mass, and stop inside tolerance.</p>
-                        </div>
-                        <div class="workflow-recording">
-                            <video controls preload="none" playsinline poster="assets/showcase/powder-formulation-cover.png" aria-label="Powder formulation dry-run recording">
-                                <source src="assets/showcase/powder-formulation.mp4" type="video/mp4">
-                                <a href="assets/showcase/powder-formulation.mp4">Open the powder formulation recording</a>
-                            </video>
-                            <p class="workflow-recording-meta">10 recorded steps <span aria-hidden="true">&middot;</span> 9.8 seconds <span aria-hidden="true">&middot;</span> dry run</p>
-                        </div>
-                        <div class="workflow-horizon">2 doses<br>2 balance readings</div>
-                        <div class="workflow-evaluation">
-                            <ol>
-                                <li>Preserve vial identity</li>
-                                <li>Correct from measured mass</li>
-                                <li>Confirm the tolerance band</li>
-                            </ol>
-                        </div>
-                        <div class="workflow-dimension">Feedback and tolerance reasoning</div>
-                    </article>
-                </div>
-
-                <p class="workflow-boundary"><strong>Grounding boundary:</strong> instrument calls follow PyLabRobot interfaces. Fluorescence, growth, measurement noise, accelerated time, and powder-delivery error are declared benchmark projections rather than hardware-fidelity claims.</p>
-            </div>
-        </section>
-        <section id="tracks" class="evaluation-catalog">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-kicker">Evaluation Tracks</span>
-                    <h2>Measure the capability behind each instrument run.</h2>
-                    <p>The recordings are reproducible task programs, not standalone animations. Each one exposes a different failure surface and produces concrete state and evidence for evaluating an agent run.</p>
-                </div>
-                <div class="track-table reveal" aria-label="Current Datalox scientific evaluation tracks">
-                    <div class="track-table-head" aria-hidden="true">
-                        <span>Capability</span>
-                        <span>What the agent must do</span>
-                        <span>Current program</span>
-                        <span>Run evidence</span>
-                    </div>
-                    <article class="track-row">
-                        <div class="track-name"><span>01</span><h3>Instrument sequencing</h3></div>
-                        <p class="track-requirement">Satisfy device preconditions and execute ordered stages without skipping required transitions.</p>
-                        <a class="track-program" href="#workflows">Thermocycler amplification QC</a>
-                        <p class="track-evidence">Lid state, temperature stages, cycle count, amplification artifact</p>
-                    </article>
-                    <article class="track-row">
-                        <div class="track-name"><span>02</span><h3>Long-horizon coordination</h3></div>
-                        <p class="track-requirement">Preserve sample custody, maintain conditions, wait, and measure on the required cadence.</p>
-                        <a class="track-program" href="#workflows">Eight-hour growth campaign</a>
-                        <p class="track-evidence">Slot custody, conditioned exposure, logical time, OD600 series</p>
-                    </article>
-                    <article class="track-row">
-                        <div class="track-name"><span>03</span><h3>Closed-loop correction</h3></div>
-                        <p class="track-requirement">Use a measurement to choose the next action and stop when the target tolerance is reached.</p>
-                        <a class="track-program" href="#workflows">Feedback-controlled formulation</a>
-                        <p class="track-evidence">Dose pulses, balance readings, correction amount, final tolerance</p>
-                    </article>
-                    <article class="track-row">
-                        <div class="track-name"><span>04</span><h3>Evidence integrity</h3></div>
-                        <p class="track-requirement">Base the final decision on complete, fresh, control-linked evidence from the current run.</p>
-                        <span class="track-program track-programs">Shared across all three programs</span>
-                        <p class="track-evidence">Artifact identity, timestamps, controls, completeness, final decision</p>
-                    </article>
-                </div>
-                <p class="track-note">Model results will be added only after the same task versions have been run under the same tool and time limits.</p>
-            </div>
-        </section>
-
-        <section id="answer" class="direct-answer">
-            <div class="container">
-                <div class="section-header answer-header">
-                    <span class="section-kicker">Direct Answer</span>
-                    <h2>What is Datalox?</h2>
-                    <p>Datalox is a platform for giving AI agents stable, versioned task worlds they can run against for training, eval, regression, and rollout evidence.</p>
-                </div>
-                <div class="answer-grid">
-                    <div class="answer-card reveal">
-                        <i class="fas fa-layer-group"></i>
-                        <h3>Datalox</h3>
-                        <p>Datalox provides versioned agent task environments for teams building tool-using AI agents.</p>
-                    </div>
-                    <div class="answer-card reveal">
-                        <i class="fas fa-cubes"></i>
-                        <h3>Versioned environment</h3>
-                        <p>A pinned world that defines the agent's tools, task context, expected observations, and verifier metadata.</p>
-                    </div>
-                    <div class="answer-card reveal">
-                        <i class="fas fa-box-archive"></i>
-                        <h3>Replay world contents</h3>
-                        <p>Tool catalogs, exact requests, exact observations, task specs, checksums, provenance, and replay miss rules.</p>
-                    </div>
-                    <div class="answer-card reveal">
-                        <i class="fas fa-code-branch"></i>
-                        <h3>Who uses it</h3>
-                        <p>Agent teams that need reproducible training data, eval worlds, regression suites, and private fixture authoring.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="environments" class="how-it-works">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-kicker">Environment Types</span>
-                    <h2>Two ways to give agents a stable world.</h2>
-                    <p>Datalox separates real domain workspaces from deterministic snapshot worlds so teams can choose the right boundary for training, eval, and regression.</p>
-                </div>
-                <div class="how-grid">
-                    <div class="how-card live-env reveal">
-                        <div class="card-icon active"><i class="fas fa-flask-vial"></i></div>
-                        <h3>Live domain MCP environments</h3>
-                        <p>Real Datalox-owned workspaces where agents do domain work through constrained MCP tools.</p>
-                        <ul class="how-list">
-                            <li>Flow cytometry, molecule biology, and protein visualization workspaces.</li>
-                            <li>Domain files, parsers, validation, revisions, and compact UIs stay in the live env repo.</li>
-                            <li>Rollouts can emit replay evidence for training and eval exports.</li>
-                        </ul>
-                    </div>
-                    <div class="how-card snapshot-env reveal">
-                        <div class="card-icon active-green"><i class="fas fa-box-archive"></i></div>
-                        <h3>Replay-backed API/MCP snapshots</h3>
-                        <p>Deterministic fixture worlds built from frozen tool catalogs, requests, observations, tasks, and verifier metadata.</p>
-                        <ul class="how-list">
-                            <li>Install a pinned fixture or fixture set by version.</li>
-                            <li>Serve recorded observations with live upstream off.</li>
-                            <li>Return explicit replay misses instead of inventing unseen behavior.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="modes" class="advantages">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-kicker">User Modes</span>
-                    <h2>Use a published world, run live, or create your own.</h2>
-                    <p>Recording is one authoring path. Most users should start by consuming a versioned environment.</p>
-                </div>
-                <div class="advantage-grid mode-grid">
-                    <div class="advantage-card reveal">
-                        <span class="adv-number">A</span>
-                        <h3>Use a published fixture</h3>
-                        <p>Install a pinned fixture world such as <code>github-pr-review-basic@2026-05.0</code> and run agents against deterministic replay.</p>
-                    </div>
-                    <div class="advantage-card reveal">
-                        <span class="adv-number">B</span>
-                        <h3>Use a live domain env</h3>
-                        <p>Give agents access to a Datalox-owned MCP workspace for domain work, then capture rollout evidence when useful.</p>
-                    </div>
-                    <div class="advantage-card reveal">
-                        <span class="adv-number">C</span>
-                        <h3>Create a private fixture</h3>
-                        <p>Route one rollout through the recording proxy, pack exact tool observations, and keep the fixture private or approved for sharing.</p>
-                    </div>
-                </div>
-                <div class="code-band reveal" role="img" aria-label="Datalox environment consumption model">
-                    <span>fixture set</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>replay runtime</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>agent run</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>training/eval exports</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="world" class="vision">
-            <div class="container">
-                <div class="vision-content">
-                    <div class="vision-text">
-                        <span class="section-kicker">Inside A World</span>
-                        <h2>A versioned world is more than a trace.</h2>
-                        <p class="vision-subtitle">Each replay-backed environment packages the stable pieces an agent needs to run the same task world again.</p>
-                        <div class="vision-points">
-                            <div class="vision-point reveal">
-                                <div class="point-number">T</div>
-                                <div class="point-content">
-                                    <h4>Tools and observations</h4>
-                                    <p>Frozen MCP tool catalogs, exact tool requests, exact observations, request hashes, and sequence indexes.</p>
-                                </div>
-                            </div>
-                            <div class="vision-point reveal">
-                                <div class="point-number">S</div>
-                                <div class="point-content">
-                                    <h4>Tasks and verifier metadata</h4>
-                                    <p>Task specs, scaffold specs, verifier refs, reference rubrics, and replay miss rules preserved as metadata.</p>
-                                </div>
-                            </div>
-                            <div class="vision-point reveal">
-                                <div class="point-number">V</div>
-                                <div class="point-content">
-                                    <h4>Versioning and trust</h4>
-                                    <p>Replay bundles, checksums, provenance, export gates, train/dev/test splits, explicit replay misses, and optional SFT or eval derivatives.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="world-detail-panel reveal">
-                        <div class="panel-toolbar">
-                            <div class="panel-dots" aria-hidden="true">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <span>fixture-world.manifest</span>
-                        </div>
-                        <div class="manifest-list">
-                            <div><strong>tools</strong><span>tool catalogs and MCP surfaces</span></div>
-                            <div><strong>requests</strong><span>exact tool calls and sequence indexes</span></div>
-                            <div><strong>observations</strong><span>recorded tool results and response bodies</span></div>
-                            <div><strong>tasks</strong><span>review PR, inspect CI, cite risks</span></div>
-                            <div><strong>verifiers</strong><span>evidence and rubric metadata</span></div>
-                            <div><strong>trust</strong><span>checksums, provenance, export gate</span></div>
-                            <div><strong>splits</strong><span>train, dev, test task membership</span></div>
-                            <div><strong>misses</strong><span>explicit replay miss rules</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="fixtures" class="provider-coverage">
-            <div class="container">
-                <div class="coverage-intro">
-                    <div class="section-header">
-                        <span class="section-kicker">Grounding Coverage</span>
-                        <h2>API evidence used to construct task worlds.</h2>
-                        <p>Datalox combines documented provider maps, locally probed services, and captured response cases. Coverage is labeled by evidence level; an executable replay is not presented as proof of unobserved provider behavior.</p>
-                    </div>
-                    <div class="coverage-stats reveal" aria-label="Checked Datalox runtime inventory totals">
-                        <div><strong>50</strong><span>executable environment assets</span></div>
-                        <div><strong>24</strong><span>probed or captured replay assets</span></div>
-                        <div><strong>20</strong><span>admitted stateful worlds</span></div>
-                    </div>
-                </div>
-
-                <div class="provider-strip reveal" aria-label="Representative provider evidence">
-                    <article class="provider-item">
-                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=opentrons.com&amp;sz=64" alt="" loading="lazy"></span>
-                        <div><h3>Opentrons</h3><p>open-reference capture <span>66 cases</span></p></div>
-                    </article>
-                    <article class="provider-item">
-                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=rcsb.org&amp;sz=64" alt="" loading="lazy"></span>
-                        <div><h3>RCSB PDB</h3><p>captured <span>28 cases</span></p></div>
-                    </article>
-                    <article class="provider-item">
-                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=open.fda.gov&amp;sz=64" alt="" loading="lazy"></span>
-                        <div><h3>OpenFDA</h3><p>captured <span>22 cases</span></p></div>
-                    </article>
-                    <article class="provider-item">
-                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"></span>
-                        <div><h3>GitHub REST</h3><p>documented map <span>27 cases</span></p></div>
-                    </article>
-                    <article class="provider-item">
-                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=datadoghq.com&amp;sz=64" alt="" loading="lazy"></span>
-                        <div><h3>Datadog</h3><p>documented map <span>21 cases</span></p></div>
-                    </article>
-                    <article class="provider-item">
-                        <span class="provider-icon"><img src="https://www.google.com/s2/favicons?domain=cromwell.readthedocs.io&amp;sz=64" alt="" loading="lazy"></span>
-                        <div><h3>Cromwell</h3><p>locally probed <span>14 cases</span></p></div>
-                    </article>
-                </div>
-                <div class="coverage-footer">
-                    <p>Inventory checked from the generated runtime report dated 2026-08-05. Counts describe executable evidence, not equal provider depth or production fidelity.</p>
-                    <a href="#contact">Bring a source surface <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="how-it-works" class="developer-flow">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-kicker">How It Works</span>
-                    <h2>Install a world, replay it, or author a private snapshot.</h2>
-                    <p>Recording is an authoring path, not the product surface: users consume versioned worlds, run live domain environments, or create private fixtures from approved rollouts.</p>
-                </div>
-                <div class="flow-grid">
-                    <div class="cli-card reveal">
-                        <h3>Use a published fixture</h3>
-                        <pre><code>datalox fixtures install github-pr-review-basic@2026-05.0
-datalox replay --fixture github-pr-review-basic@2026-05.0</code></pre>
-                    </div>
-                    <div class="cli-card reveal">
-                        <h3>Use a fixture set</h3>
-                        <pre><code>datalox env install documented_shopify_admin_v0
-datalox gate serve --env documented_shopify_admin_v0</code></pre>
-                    </div>
-                    <div class="cli-card reveal">
-                        <h3>Create a private fixture</h3>
-                        <pre><code>datalox proxy --mode record
-datalox bundle pack --bundle-id private-task-world
-datalox replay --bundle .datalox/replay-bundles/private-task-world</code></pre>
-                    </div>
-                </div>
-                <div class="authoring-path reveal">
-                    <span>live MCP/API/domain env</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>agent rollout</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>tool I/O record</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>replay bundle</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                    <span>fixture pack/version</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="faq">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-kicker">FAQ</span>
-                    <h2>Definitions for agent task environments.</h2>
-                    <p>These answers are intentionally direct so teams and AI systems can classify Datalox without guessing from logs or observability language.</p>
-                </div>
-                <div class="faq-list">
-                    <article class="faq-item reveal">
-                        <h3>What is a versioned agent task environment?</h3>
-                        <p>A versioned agent task environment is a pinned world an AI agent can act in repeatedly. It defines the available tools, task context, observations, verifier metadata, and versioned fixture state needed to reproduce or evaluate agent behavior.</p>
-                    </article>
-                    <article class="faq-item reveal">
-                        <h3>How is Datalox different from agent logging or observability?</h3>
-                        <p>Agent logging records what happened in one run. Datalox turns the relevant environment surface into a reusable task world so agents can train, evaluate, and regress against the same tool/API behavior.</p>
-                    </article>
-                    <article class="faq-item reveal">
-                        <h3>What is a replay-backed API/MCP snapshot?</h3>
-                        <p>A replay-backed API/MCP snapshot is a deterministic fixture world built from frozen tool catalogs, exact requests, exact observations, task specs, verifier metadata, checksums, and replay miss rules.</p>
-                    </article>
-                    <article class="faq-item reveal">
-                        <h3>When should a team use a live domain MCP environment?</h3>
-                        <p>Use a live domain MCP environment when the agent must do real domain work in a Datalox-owned workspace, such as flow cytometry, molecule annotation, or protein visualization.</p>
-                    </article>
-                    <article class="faq-item reveal">
-                        <h3>Can a team create a private fixture?</h3>
-                        <p>Yes. A team can run an approved agent rollout through the recording path once, pack the observed tool/API behavior into a replay bundle, and keep the resulting fixture private.</p>
-                    </article>
-                    <article class="faq-item reveal">
-                        <h3>What does "versioned" mean in Datalox?</h3>
-                        <p>In Datalox, versioned means the task world is pinned to a named fixture or fixture set with stable tool catalogs, observations, task metadata, verifier metadata, checksums, provenance, and split membership.</p>
-                    </article>
-                    <article class="faq-item reveal">
-                        <h3>How do teams verify that a replay world matches the original environment?</h3>
-                        <p>Teams verify replay faithfulness by checking request hashes, sequence indexes, recorded observations, checksums, provenance, verifier metadata, and explicit replay misses against the original approved rollout.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <span class="section-kicker">Design Partners</span>
-                        <h2>Bring one agent task world.</h2>
-                        <p>We will help identify whether it should be a live domain environment, a replay-backed snapshot, or a private fixture authored from one rollout.</p>
-                        <div class="contact-details">
-                            <div class="contact-item reveal">
-                                <i class="fas fa-envelope"></i>
-                                <div>
-                                    <h4>Email</h4>
-                                    <a href="mailto:contact@complexity-ai.com">contact@complexity-ai.com</a>
-                                </div>
-                            </div>
-                            <div class="contact-item reveal">
-                                <i class="fas fa-building"></i>
-                                <div>
-                                    <h4>Company</h4>
-                                    <p>Complexity LLC</p>
-                                </div>
-                            </div>
-                            <div class="contact-item reveal">
-                                <i class="fas fa-calendar"></i>
-                                <div>
-                                    <h4>Founded</h4>
-                                    <p>2025</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-form reveal">
-                        <form class="form">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input id="name" name="name" type="text" placeholder="Your name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input id="email" name="email" type="email" placeholder="you@company.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="interest">Interest</label>
-                                <select id="interest" name="interest" required>
-                                    <option value="">Select interest</option>
-                                    <option value="published-fixture">Published fixture</option>
-                                    <option value="live-domain-mcp-environment">Live domain MCP environment</option>
-                                    <option value="private-fixture-authoring">Private fixture authoring</option>
-                                    <option value="training-eval-exports">Training/eval exports</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" placeholder="What agent task world are you trying to make reproducible?" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-full">
-                                <i class="fas fa-paper-plane"></i>
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <svg
-                            class="datalox-mark-icon"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                        >
-                            <path d="M5 4v16"></path>
-                            <path d="M5 4c9.5 0 14 2.8 14 8s-4.5 8-14 8"></path>
-                            <path d="M18 9h3"></path>
-                            <path d="M18 15h3"></path>
-                        </svg>
-                        <span>Complexity LLC</span>
-                    </div>
-                    <p>Datalox provides versioned agent task environments: live domain MCP environments and replay-backed API/MCP snapshot worlds for reproducible training, eval, and regression.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Product</h4>
-                        <a href="#workflows">Task Catalog</a>
-                        <a href="#tracks">Evaluation Tracks</a>
-                        <a href="#environments">Environments</a>
-                        <a href="#fixtures">Grounding Coverage</a>
-                        <a href="#how-it-works">How It Works</a>
-                        <a href="#faq">FAQ</a>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Contact</h4>
-                        <a href="#contact">Request Demo</a>
-                        <a href="mailto:contact@complexity-ai.com">Email</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Complexity LLC. All rights reserved.</p>
+            <div class="loop-owners">
+                <h3 class="owners-title">The loop</h3>
+                <ol class="owner-list">
+                    <li class="is-active" data-loop-row><span class="owner-name">Real failures found</span><span class="owner-role">01</span></li>
+                    <li data-loop-row><span class="owner-name">Built on real data</span><span class="owner-role">02</span></li>
+                    <li data-loop-row><span class="owner-name">Models practice</span><span class="owner-role">03</span></li>
+                    <li data-loop-row><span class="owner-name">Failures show up</span><span class="owner-role">04</span></li>
+                    <li data-loop-row><span class="owner-name">We target the gap</span><span class="owner-role">05</span></li>
+                    <li data-loop-row><span class="owner-name">The frontier moves</span><span class="owner-role">06</span></li>
+                </ol>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="section" id="customers" aria-labelledby="customers-title">
+        <div class="section-label"><span>Customers &amp; partners</span><span><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Environment onboarded</span></div>
+        <h2 class="visually-hidden" id="customers-title">Customers and partners</h2>
+        <div class="customers-grid">
+            <figure class="card quote-card">
+                <svg class="icon quote-mark" aria-hidden="true"><use href="#i-quote"/></svg>
+                <blockquote><p>Complexity AI is part of our benchmarking product. We&rsquo;re working with them to run evaluations and investigate model failures on their environment.</p></blockquote>
+                <figcaption><strong>Member of Technical Staff</strong><span>Fleet AI</span></figcaption>
+            </figure>
+            <div class="card researchers">
+                <h3>Working with wet-lab experts at</h3>
+                <ul class="tag-list">
+                    <li>Arene Life Sciences</li><li>A CRO partner</li>
+                </ul>
+                <p>Wet-lab experts help us find where models fail and why an expert would trust a run.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="twin" aria-labelledby="twin-title">
+        <div class="section-label"><span>OT-2 twin &middot; prototype</span><span>Built from one robot&rsquo;s records</span></div>
+        <div class="section-head">
+            <h2 id="twin-title">Catch bad moves <em>before the robot runs them.</em></h2>
+            <p>Our OT-2 twin is built from one real robot&rsquo;s records: its calibrated tip lengths, its offsets, the depth where its tip touched a tube. It runs a protocol in Opentrons&rsquo; own software and checks every move against the labware before the robot runs it.</p>
+        </div>
+        <figure class="twin-film" data-twin-film>
+            <video src="assets/showcase/ot2-twin-precheck.mp4" poster="assets/showcase/ot2-twin-precheck.jpg" muted playsinline loop controls preload="metadata" aria-describedby="twin-film-caption"></video>
+            <figcaption id="twin-film-caption">A test protocol with four bad moves passes Opentrons&rsquo; analysis. The twin finds five contacts, each on its script line. The protocol that actually ran on the robot comes back clean.</figcaption>
+        </figure>
+        <dl class="twin-facts">
+            <div><dt>5 / 5</dt><dd>recorded robot outcomes reproduced in the official planner</dd></div>
+            <div><dt>5</dt><dd>contacts in a protocol that Opentrons&rsquo; analysis passed</dd></div>
+            <div><dt>0</dt><dd>findings on the protocol that ran on the robot</dd></div>
+            <div><dt>30.85 mm</dt><dd>tip length from the robot&rsquo;s calibration, where the software assumes 30.95</dd></div>
+        </dl>
+        <div class="twin-grid">
+            <article class="card">
+                <div class="card-head"><h3>How one move is checked</h3><span class="chip chip-neutral">Every segment</span></div>
+                <ol class="check-steps">
+                    <li><span class="rank">1</span><span><strong>A move is requested</strong>From a protocol line, or from an agent through MCP</span></li>
+                    <li><span class="rank">2</span><span><strong>Opentrons plans it</strong>The official 8.8.2 engine, with this robot&rsquo;s tip lengths and offsets</span></li>
+                    <li><span class="rank">3</span><span><strong>The twin follows the path</strong>The tip is placed along every segment the planner emits, not just where it stops</span></li>
+                    <li><span class="rank">4</span><span><strong>The path is checked</strong>Against labware shapes from the official definitions, with wells kept hollow</span></li>
+                    <li><span class="rank">5</span><span><strong>Two records, kept apart</strong>What the software said and what the geometry found, tied to the script line</span></li>
+                </ol>
+            </article>
+            <article class="card">
+                <div class="card-head"><h3>What agents practice</h3><span class="chip chip-green"><span class="live-dot" aria-hidden="true"></span>4 task families</span></div>
+                <ul class="practice-list">
+                    <li><strong>Arc moves</strong><span>Choose a travel height and route the planner will accept</span></li>
+                    <li><strong>Probing a tube</strong><span>Step down toward the bottom of a tube without touching it</span></li>
+                    <li><strong>Stale offsets</strong><span>Notice when a run&rsquo;s offsets no longer match the robot, then proceed or defer</span></li>
+                    <li><strong>Measuring an offset</strong><span>Measure a rack&rsquo;s offset with the tools the operator&rsquo;s scripts use</span></li>
+                </ul>
+                <p class="card-note">Hidden setup stays hidden during evaluation. A finding means the tip&rsquo;s path meets labware; it does not predict damage.</p>
+            </article>
+        </div>
+        <div class="twin-next">
+            <span class="twin-next-label">Next for the twin</span>
+            <ul class="tag-list">
+                <li>Agent practice, tested on new layouts</li>
+                <li>Full tip and pipette shapes</li>
+                <li>Supervised checks on the real robot</li>
+                <li>More operations, one at a time</li>
+            </ul>
+        </div>
+        <p class="grounding-note">Rendered from real runs of Opentrons&rsquo; official 8.8.2 software and our pre-run check. No live hardware is attached, and the bad-move protocol is a test file.</p>
+    </section>
+
+    <section class="section" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-label"><span>Roadmap &middot; next 24 months</span><span>Targets, not commitments</span></div>
+        <div class="section-head">
+            <h2 id="roadmap-title">From environments to <em>the task engine.</em></h2>
+            <p>Data stays public by default, with planted changes where needed. Licenses only on order.</p>
+        </div>
+        <div class="roadmap">
+            <article>
+                <span class="roadmap-status"><span class="live-dot" aria-hidden="true"></span>Today &rarr; 6 months</span>
+                <h3>Frontier packs</h3>
+                <ul>
+                    <li>RL environments rebuilt after every model release</li>
+                    <li>Expert sessions that find where models fail</li>
+                    <li>32 tasks today, more each quarter</li>
+                </ul>
+            </article>
+            <article>
+                <span class="roadmap-status"><span class="live-dot dot-amber" aria-hidden="true"></span>6 &rarr; 12 months</span>
+                <h3>Failure library</h3>
+                <ul>
+                    <li>New environment families and private test sets</li>
+                    <li>A failure library across instruments</li>
+                    <li>A paid analysis service, confidential like any CRO</li>
+                    <li>Small error-check models</li>
+                </ul>
+            </article>
+            <article>
+                <span class="roadmap-status"><span class="live-dot dot-muted" aria-hidden="true"></span>12 &rarr; 24 months</span>
+                <h3>Instrument twins</h3>
+                <ul>
+                    <li>OT-2 first: a prototype built from one robot&rsquo;s records exists today</li>
+                    <li>More instruments, each built from a lab&rsquo;s own records</li>
+                    <li>Run-QC models trained on our failure map</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="card contact-card">
+            <div class="contact-copy">
+                <h2 id="contact-title">Bring the experiment <em>your model gets wrong.</em></h2>
+                <p>Training AI scientists, building RL environments, or running lab work you&rsquo;d like analyzed? Tell us what you&rsquo;re working on.</p>
+                <a class="contact-email" href="mailto:contact@complexity-ai.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>contact@complexity-ai.com</a>
+            </div>
+            <form class="form" aria-label="Contact Complexity AI">
+                <div class="form-row">
+                    <div class="form-group"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" maxlength="150" required></div>
+                    <div class="form-group"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@lab.com" maxlength="254" required></div>
+                </div>
+                <div class="form-group">
+                    <label for="message">What are you working on?</label>
+                    <div class="composer">
+                        <textarea id="message" name="message" rows="3" maxlength="10000" placeholder="A model you're training, an environment you need, or lab data you'd like analyzed." required></textarea>
+                        <div class="composer-bar">
+                            <label class="visually-hidden" for="interest">I'm interested in</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Select a focus</option>
+                                <option value="rl-environments">RL environments &amp; frontier packs</option>
+                                <option value="analysis-service">Analysis service</option>
+                                <option value="lab-data">Lab or data partnership</option>
+                                <option value="research-collaboration">Research collaboration</option>
+                                <option value="other">Something else</option>
+                            </select>
+                            <button type="submit" class="button button-primary">Send <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+                        </div>
+                    </div>
+                </div>
+                <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a class="logo" href="#top"><svg class="brand-mark" viewBox="0 0 32 36" aria-hidden="true"><path d="M16 1 31 9v18l-15 8L1 27V9Zm0 4L6 10l10 5 10-5ZM5 14v11l9 5V19Zm13 5v11l9-5V14Z" fill="currentColor"/></svg><span>Complexity AI</span></a>
+            <p>Bring autonomous science to every lab in the world.</p>
+        </div>
+        <nav class="footer-col" aria-labelledby="footer-product">
+            <h2 id="footer-product">Product</h2>
+            <a href="#environments">RL environments</a>
+            <a href="#loop">How it works</a>
+            <a href="#twin">OT-2 twin</a>
+            <a href="#roadmap">Roadmap</a>
+        </nav>
+        <nav class="footer-col" aria-labelledby="footer-company">
+            <h2 id="footer-company">Company</h2>
+            <a href="#customers">Customers</a>
+            <a href="#contact">Work with us</a>
+            <a href="mailto:contact@complexity-ai.com">Email</a>
+            <a href="/llms.txt">llms.txt</a>
+        </nav>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 Complexity LLC</span><span>Graded by real experiments.</span></div>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>

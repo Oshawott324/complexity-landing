@@ -1,149 +1,95 @@
-const fs = require('fs');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const { parseHTML } = require('linkedom');
 
 const html = fs.readFileSync('index.html', 'utf8');
-const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+const { document } = parseHTML(html);
+const summary = fs.readFileSync('llms.txt', 'utf8');
+const jsonLd = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent);
+assert.equal(jsonLd.name, 'Complexity AI');
+assert.equal(jsonLd['@type'], 'Organization');
+assert.equal(document.querySelectorAll('h1').length, 1);
 
-if (!jsonLdMatch) {
-    throw new Error('Missing JSON-LD script block');
+for (const phrase of ['We train AI scientists', 'real lab work.']) {
+    assert.ok(document.querySelector('h1').textContent.includes(phrase));
 }
-
-const jsonLd = JSON.parse(jsonLdMatch[1]);
-const faqPage = jsonLd['@graph'].find((item) => item['@type'] === 'FAQPage');
-
-if (!faqPage) {
-    throw new Error('Missing FAQPage JSON-LD entry');
+for (const link of document.querySelectorAll('.nav-link')) {
+    assert.ok(document.getElementById(link.getAttribute('href').slice(1)), 'Navigation link without a section: ' + link.getAttribute('href'));
 }
-
-const jsonLdFaqNames = faqPage.mainEntity.map((question) => question.name);
-
-const requiredFaqs = [
-    'What does "versioned" mean in Datalox?',
-    'How do teams verify that a replay world matches the original environment?'
-];
-
-for (const question of requiredFaqs) {
-    if (!html.includes(`<h3>${question}</h3>`)) {
-        throw new Error(`Missing visible FAQ question: ${question}`);
-    }
-    if (!jsonLdFaqNames.includes(question)) {
-        throw new Error(`Missing JSON-LD FAQ question: ${question}`);
-    }
+for (const id of ['top', 'problem', 'environments', 'loop', 'customers', 'twin', 'roadmap', 'contact']) {
+    assert.ok(document.getElementById(id), 'Missing section: ' + id);
 }
-
-const faqCardCount = (html.match(/class="faq-item reveal"/g) || []).length;
-if (faqCardCount !== 7) {
-    throw new Error(`Expected 7 visible FAQ items, found ${faqCardCount}`);
+assert.equal(document.querySelectorAll('.problem-grid article').length, 4);
+assert.deepEqual([...document.querySelectorAll('#environments .card-head .chip')].map((chip) => chip.textContent.trim()), ['Now', 'Next']);
+assert.ok(!document.getElementById('team') && !document.querySelector('.team-member'), 'Individual team profiles are not published');
+for (const text of [html, summary]) {
+    assert.ok(!/\b(CEO|CTO|COO|Chief Scientist)\b/.test(text), 'Individual team roles are not published');
 }
-
-const requiredProviders = [
-    'Datadog',
-    'GitHub REST',
-    'Opentrons',
-    'Cromwell',
-    'OpenFDA',
-    'RCSB PDB'
-];
-
-for (const provider of requiredProviders) {
-    if (!html.includes(`<h3>${provider}</h3>`)) {
-        throw new Error(`Missing representative provider: ${provider}`);
-    }
+for (const text of [html, summary]) {
+    assert.ok(!/\bMIT\b|Harvard|U\. Michigan|U\. Chicago|University of/.test(text), 'Universities are not listed');
 }
+assert.equal(document.querySelector('.quote-card figcaption').textContent.trim(), 'Member of Technical StaffFleet AI', 'Quote stays unattributed by name');
+assert.deepEqual([...document.querySelectorAll('.partner-logos li')].map((item) => item.textContent.trim()), ['fleet', 'micro1.']);
+assert.ok(summary.includes('Design partners: Fleet and micro1.'));
+assert.equal(document.querySelectorAll('[role="tab"]').length, 6);
+assert.equal(document.querySelectorAll('[role="tab"][aria-selected="true"]').length, 1);
+assert.ok(document.getElementById('roadmap').textContent.includes('Targets, not commitments'));
+assert.ok(document.getElementById('twin').textContent.includes('prototype'));
+assert.ok(document.querySelector('.grounding-note').textContent.includes('No live hardware'));
+assert.ok(summary.includes('Next: Task Engine'));
 
-const providerStripMatch = html.match(/<div class="provider-strip reveal"[\s\S]*?<\/div>\s*<div class="coverage-footer">/);
-if (!providerStripMatch) {
-    throw new Error('Missing representative provider strip');
+const ids = new Set();
+for (const element of document.querySelectorAll('[id]')) {
+    assert.ok(!ids.has(element.id), 'Duplicate id: ' + element.id);
+    ids.add(element.id);
 }
-
-const providerStrip = providerStripMatch[0];
-const providerLogoCount = (providerStrip.match(/<img src="https:\/\/www\.google\.com\/s2\/favicons\?/g) || []).length;
-if (providerLogoCount !== 6) {
-    throw new Error(`Expected 6 representative provider icon images, found ${providerLogoCount}`);
+for (const link of document.querySelectorAll('a[href^="#"]')) {
+    assert.ok(ids.has(link.getAttribute('href').slice(1)), 'Broken anchor: ' + link.getAttribute('href'));
 }
-
-if (html.includes('source-grid') || html.includes('Provider Inventory')) {
-    throw new Error('Homepage must not present provider coverage as a primary inventory grid');
-}
-
-const providerSectionIndex = html.indexOf('<section id="fixtures"');
-const trackSectionIndex = html.indexOf('<section id="tracks"');
-const answerSectionIndex = html.indexOf('<section id="answer"');
-const environmentSectionIndex = html.indexOf('<section id="environments"');
-const worldSectionIndex = html.indexOf('<section id="world"');
-const howItWorksSectionIndex = html.indexOf('<section id="how-it-works"');
-
-if ([providerSectionIndex, trackSectionIndex, answerSectionIndex, environmentSectionIndex, worldSectionIndex, howItWorksSectionIndex].includes(-1)) {
-    throw new Error('Missing required top-level page sections');
-}
-
-if (providerSectionIndex < worldSectionIndex || providerSectionIndex > howItWorksSectionIndex) {
-    throw new Error('Grounding Coverage must support the product story after Inside A World');
-}
-
-const requiredInventoryFacts = [
-    '<strong>50</strong><span>executable environment assets</span>',
-    '<strong>24</strong><span>probed or captured replay assets</span>',
-    '<strong>20</strong><span>admitted stateful worlds</span>'
-];
-
-for (const fact of requiredInventoryFacts) {
-    if (!html.includes(fact)) {
-        throw new Error(`Missing checked grounding inventory fact: ${fact}`);
+for (const element of document.querySelectorAll('[aria-controls], [aria-labelledby]')) {
+    for (const attribute of ['aria-controls', 'aria-labelledby']) {
+        for (const id of (element.getAttribute(attribute) || '').split(' ').filter(Boolean)) {
+            assert.ok(ids.has(id), 'Broken accessibility reference: ' + id);
+        }
     }
 }
-
-const trackSectionMatch = html.match(/<section id="tracks"[\s\S]*?<\/section>/);
-if (!trackSectionMatch) {
-    throw new Error('Missing evaluation track section');
-}
-
-const trackSection = trackSectionMatch[0];
-const trackCount = (trackSection.match(/class="track-row"/g) || []).length;
-if (trackCount !== 4) {
-    throw new Error(`Expected 4 evaluation tracks, found ${trackCount}`);
-}
-
-if (!trackSection.includes('Model results will be added only after')) {
-    throw new Error('Evaluation section must not imply unpublished model results');
-}
-
-const workflowSectionMatch = html.match(/<section id="workflows"[\s\S]*?<\/section>/);
-if (!workflowSectionMatch) {
-    throw new Error('Missing recorded workflow showcase');
-}
-
-const workflowSection = workflowSectionMatch[0];
-const workflowVideoCount = (workflowSection.match(/<video controls/g) || []).length;
-if (workflowVideoCount !== 3) {
-    throw new Error(`Expected 3 recorded workflow videos, found ${workflowVideoCount}`);
-}
-
-if (workflowSection.includes('autoplay')) {
-    throw new Error('Workflow recordings must not autoplay');
-}
-
-const workflowSectionIndex = html.indexOf('<section id="workflows"');
-if (workflowSectionIndex === -1 || workflowSectionIndex > trackSectionIndex) {
-    throw new Error('Recorded workflow showcase must appear before Evaluation Tracks');
-}
-
-const showcaseAssets = [
-    'thermocycler-qpcr.mp4',
-    'incubator-growth.mp4',
-    'powder-formulation.mp4',
-    'thermocycler-qpcr-cover.png',
-    'incubator-growth-cover.png',
-    'powder-formulation-cover.png'
-];
-
-for (const asset of showcaseAssets) {
-    const assetPath = `assets/showcase/${asset}`;
-    if (!fs.existsSync(assetPath) || fs.statSync(assetPath).size < 1000) {
-        throw new Error(`Missing or empty workflow showcase asset: ${assetPath}`);
-    }
-    if (!workflowSection.includes(assetPath)) {
-        throw new Error(`Workflow showcase does not reference asset: ${assetPath}`);
+for (const image of document.querySelectorAll('img')) {
+    const src = image.getAttribute('src');
+    assert.ok(image.hasAttribute('alt'), 'Image missing alt text');
+    if (!src.startsWith('https://')) {
+        assert.ok(fs.statSync(src).size > 1000, 'Missing or empty image: ' + src);
     }
 }
-
-console.log('site content ok');
+for (const input of document.querySelectorAll('.form input, .form select, .form textarea')) {
+    assert.ok(document.querySelector('label[for="' + input.id + '"]'), 'Missing field label');
+    assert.ok(input.hasAttribute('required'));
+}
+assert.equal(document.querySelector('.form-status').getAttribute('role'), 'status');
+for (const phrase of ['Science is one example world, not the product boundary.', 'Grounding coverage', 'Infrastructure for autonomous science', 'In talks', 'Market analysis']) {
+    for (const text of [html, summary]) assert.ok(!text.includes(phrase), 'Obsolete or investor-only copy: ' + phrase);
+}
+for (const text of [html, summary]) {
+    // Market sizing, growth multiples, and contract sizes stay in the investor deck.
+    assert.ok(!/\$\s?\d[\d.,]*(\s?[–-]\s?\d[\d.,]*)?\s?(B|bn|billion)\b/i.test(text), 'Market-size figure on the public site');
+    assert.ok(!/\b\d+\s?[–-]\s?\d+\s?x\b/.test(text), 'Growth multiple on the public site');
+    assert.ok(!/figures per quarter/i.test(text), 'Contract-size claim on the public site');
+}
+const symbols = new Set([...document.querySelectorAll('symbol')].map((symbol) => symbol.id));
+for (const use of document.querySelectorAll('use')) {
+    assert.ok(symbols.has(use.getAttribute('href').slice(1)), 'Missing icon: ' + use.getAttribute('href'));
+}
+for (const [, name] of fs.readFileSync('script.js', 'utf8').matchAll(/icon: '([a-z-]+)'/g)) {
+    assert.ok(symbols.has('i-' + name), 'Missing stage icon: ' + name);
+}
+for (const name of ['i-play', 'i-pause']) assert.ok(symbols.has(name), 'Missing player icon: ' + name);
+assert.equal(document.querySelectorAll('[data-loop-row]').length, 6);
+const twinVideo = document.querySelector('[data-twin-film] video');
+assert.ok(twinVideo, 'OT-2 twin film is present');
+for (const attribute of ['src', 'poster']) {
+    assert.ok(fs.statSync(twinVideo.getAttribute(attribute)).size > 1000, 'Missing twin film asset: ' + twinVideo.getAttribute(attribute));
+}
+assert.ok(document.getElementById('twin').textContent.includes('one real robot'));
+assert.ok(!/crash|bend|crack|break/i.test(document.getElementById('twin-title').textContent), 'Twin claims contact, not damage');
+assert.equal(document.querySelectorAll('#twin .check-steps li').length, 5);
+assert.equal(document.querySelectorAll('#twin .practice-list li').length, 4);
+console.log('Content, assets, icons, anchors, accessibility references, and product boundaries: passed');

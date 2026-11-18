@@ -1,10 +1,10 @@
 {
   "name": "complexity-landing",
   "version": "1.0.0",
-  "description": "Landing page for Datalox versioned agent task environments.",
+  "description": "Complexity AI: infrastructure for autonomous science.",
   "main": "script.js",
   "scripts": {
-    "test": "node --check script.js && node --check api/submit.js && node scripts/check-site-content.js"
+    "test": "node --check script.js && node --check api/submit.js && node scripts/check-site-content.js && node --test scripts/site.test.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Oshawott1124/complexity-landing#readme",
   "dependencies": {
     "nodemailer": "^7.0.5"
+  },
+  "devDependencies": {
+    "linkedom": "0.18.12"
   }
 }

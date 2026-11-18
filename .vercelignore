@@ -1,0 +1,17 @@
+# Allowlist: upload only the public site. Everything else in this repo
+# (agent packs, notes, docs, tests, brainstorms) stays private.
+/*
+!index.html
+!styles.css
+!script.js
+!llms.txt
+!robots.txt
+!sitemap.xml
+!assets
+!api
+!package.json
+!package-lock.json
+
+# Unused images from earlier drafts.
+assets/showcase/autonomous-lab-concept.jpg
+assets/showcase/ot2-protocol-replay.jpg

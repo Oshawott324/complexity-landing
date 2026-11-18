@@ -1,65 +1,49 @@
-# Datalox Landing Page
+# Complexity AI Website
 
-Static landing page for Datalox versioned agent task environments.
+Static marketing website for Complexity AI: RL environments that train AI scientists on real lab work.
 
-Datalox provides live domain MCP environments and replay-backed API/MCP
-snapshot worlds for reproducible agent training, eval, and regression.
+## Current Story
 
-## Product Message
+The October 13, 2026 deck is the source of truth:
+- **Problem:** AI knows biology but can't judge experiments, and labs can't train what they can't grade.
+- **Now:** RL environments graded by real experiments (cytometry, single-cell, assays, imaging; OT-2 twin prototype) for frontier labs and RL environment vendors.
+- **Next:** a task engine that turns failures from expert sessions and paid analysis jobs into new tasks.
+- **Roadmap (24 months, targets):** frontier packs, failure library, paid analysis service, instrument twins, run-QC models.
 
-The page is aligned around the current Datalox boundary:
+The site publishes no team profiles, market sizing, competitor analysis, contract sizes, or companies in talks.
 
-```text
-versioned API/MCP snapshot -> fixture set -> replay runtime -> agent run -> training/eval exports
-```
+## Structure
 
-Recording is an authoring mechanism for private snapshots:
+- `index.html`: homepage with top navigation, graded-task hero, design-partner strip, problem, RL environments and task engine, six-step loop, customers, OT-2 twin film, roadmap, contact, footer. Icons are an inline Lucide SVG sprite at the top of `<body>`.
+- `styles.css`: dark, Arena-inspired design (warm charcoal surfaces, bordered cards, light serif headlines).
+- `script.js`: accessible navigation and section highlighting, six-step loop tabs, OT-2 twin film playback, contact form.
+- `api/submit.js`: existing Vercel contact endpoint.
+- `llms.txt`: agent-readable summary.
+- `docs/website-refresh-2026-10-12.md`: content sources, visual decisions, and verification scope.
 
-```text
-live MCP/API/domain env -> agent rollout -> tool_io_record.v1 -> replay_bundle.v1 -> fixture pack/version
-```
+## Check Locally
 
-The landing page should not position Datalox as a scientific runtime, a generic
-memory layer, a hosted sandbox, a reward engine, or a broad integration
-marketplace.
-
-The homepage presents recorded task programs first, maps them to explicit
-evaluation tracks, explains the environment model, and shows a compact,
-evidence-labeled provider sample later as grounding coverage. Model rankings
-belong on the page only after comparable agent runs exist.
-
-## Files
-
-```text
-complexity-landing/
-  assets/showcase/    # Recorded dry-run workflow MP4s and poster frames
-  api/submit.js       # Vercel contact-form endpoint
-  index.html          # Landing page markup
-  styles.css          # Responsive site styles
-  script.js           # Navigation, reveal animations, contact form handling
-  package.json        # Minimal verification command
-```
-
-The science workflow recordings are reference-world demonstrations. They show
-PyLabRobot-shaped dry-run programs and declared benchmark dynamics; they do not
-claim live instrument execution or make Datalox a science-specific runtime.
-
-## Local Verification
-
-```bash
+```sh
+npm ci
 npm test
-python3 -m http.server 4173
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-Open `http://localhost:4173`.
+Open http://127.0.0.1:4173. The static preview does not execute the Vercel contact endpoint; form success/failure behavior is tested with isolated mocks.
 
 ## Deployment
 
-The project is linked to Vercel under `.vercel/project.json`.
+Existing Vercel project: `complexity-landing`, linked by `.vercel/project.json`.
+Existing public domain: https://www.complexity-ai.com/.
 
-```bash
+```sh
 vercel --prod --yes
 ```
 
-The contact form posts to `/api/submit`, which expects
-`GOOGLE_SHEETS_WEB_APP_URL` in the Vercel environment.
+The contact endpoint requires `GOOGLE_SHEETS_WEB_APP_URL` in the Vercel environment. Do not submit fake leads to the production form during testing.
+
+## Evidence Boundaries
+
+The OT-2 section shows a rendered replay from the OT-2 twin built from one robot's records: real runs of Opentrons' official 8.8.2 software and the pre-run check (`assets/showcase/ot2-twin-precheck.mp4`, OT-2 only). The bad-move protocol is a test file. It does not certify live hardware or physical safety.
+
+Design partners Fleet and micro1 appear as monochrome text wordmarks. The site does not publish individual team profiles, investor forecasts, or companies merely in discussions. `scripts/check-site-content.js` fails if team roles reappear or the partner strip changes.
